@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> {{ title }}</title>
+	
+	<link rel = "stylesheet" type="text/css" href="static/bootstrap.css">
+	{{other styles}}
+	
+  </head>
+  {% block body %}
+  <body>
+  <!--
+  <body style="background-color:lightblue;">
+    {% set messages = get_flashed_messages() %}
+    {% for message in messages %}
+    <h3>{{message}}</h3>
+    {% endfor %}
+  -->
+  </body>
+  {% endblock %}
+</html>
+
+
+
+    
