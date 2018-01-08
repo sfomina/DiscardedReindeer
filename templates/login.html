@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    
-    <!-- <link rel="icon" href="../../favicon.ico"> -->
+{% extends "base.html" %}
 
+{% block title %}
     <title>Signin</title>
+{% endblock %}
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
-  </head>
-
-  <body>
-
+{% block body %}
     <div class="container">
       <form class="form-signin">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -29,6 +19,4 @@
 	<div class = "container">
 		<a href="register.html">Don't have an account?</a>
 	</div>
-
-  </body>
-</html>
+{% endblock %}

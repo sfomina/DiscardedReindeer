@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title> {{ title }}</title>
+    <title>{% block title %}{% endblock %}</title>
 	
 	<link rel = "stylesheet" type="text/css" href="static/bootstrap.css">
-	{{other styles}}
+	{% block styles %}{% endblock %}
 	
   </head>
-  {% block body %}
   <body>
+  {% block body %}
   <!--
   <body style="background-color:lightblue;">
     {% set messages = get_flashed_messages() %}
@@ -16,8 +16,8 @@
     <h3>{{message}}</h3>
     {% endfor %}
   -->
-  </body>
   {% endblock %}
+  </body>
 </html>
 
 
