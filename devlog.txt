@@ -14,3 +14,7 @@ updated register form with quiz
 angelicaz -- 2018-01-10 05:55:34
 database not fully working  yet
 
+angelicaZ -- 2018-01-10 15:15:17
+data gets put in database correctly
+
+

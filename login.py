@@ -63,11 +63,22 @@ def register():
 def create_account():
     username = request.form['user']
     password = request.form['pw']
+    name = request.form['inputName']
+    age = request.form['age']
+    gender = request.form['gender']
+    sexOren = request.form['sexOren']
+    lang = request.form ['lang']
+    sort = request.form['sort']
+    progType = request.form['type']
+    bitcoin = request.form['bitcoin']
+    case = request.form['case']
+    braces = request.form['braces']
+    bio = request.form['bio']
     result = check_newuser(username)
     users = user_dict()
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users VALUES (?, encrypt(?))", (username, password))
+            c.execute("INSERT INTO users VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age, gender, sexOren, lang, sort, progType, bitcoin, case, braces , bio ))
         users[username] = password
         flash(username + " registered.")
     elif result == BAD_USER:
