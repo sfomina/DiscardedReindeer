@@ -1,0 +1,47 @@
+.header {
+    width:100%;
+    padding: 10px;
+    background-color: #794209;
+    text-align: center;
+}
+
+.header2{
+    background-color:black;
+}
+
+.pad{
+    padding: 100px;
+    text-align: center;
+}
+
+.centered{
+    text-align:center;
+}
+
+.sectioning{
+    padding-top: 30px;
+}
+
+#head1{
+    text-align:center;
+    color: #F1EDEE;	
+    font-family: Georgia, serif;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 120%;
+}
+
+#navb{
+    color: lightsteelblue;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 100%;
+}
+
+#head2{
+    text-align: center;
+    color: #FFFFFF;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 100%;
+}
