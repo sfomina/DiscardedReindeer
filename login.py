@@ -72,7 +72,6 @@ def create_account():
         flash(username + " registered.")
     elif result == BAD_USER:
         flash("That username is already in use. Try another one")
-        return redirect(url_for('register'))
     return redirect(url_for('root'))
 
 @form_site.route('/auth', methods=['POST', 'GET'])

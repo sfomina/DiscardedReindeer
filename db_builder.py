@@ -11,10 +11,21 @@ db = sqlite3.connect(f, check_same_thread=False) #open if f exists, otherwise cr
 db.create_function('encrypt', 1, encrypt_password)
 c = db.cursor()    #facilitate db ops
 
-create_users = "CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT NOT NULL);"
+create_users = '''CREATE TABLE users (
+                    username TEXT PRIMARY KEY,
+                    password TEXT NOT NULL,
+                    name INTEGER NOT NULL,
+                    gender TEXT NOT NULL,
+                    sexOren TEXT NOT  NULL,
+                    lang TEXT NOT NULL,
+                    sortAlg TEXT NOT NULL,
+                    type TEXT NOT NULL,
+                    bitcoin TEXT NOT NULL,
+                    nameCase TEXT NOT NULL,
+                    braces TEXT NOT NULL,
+                    bio TEXT NOT NULL);'''
 
-
-insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'));"
+insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', 18, 'Male', 'Bisexual', 'Java', 'Merge Sort', 'OOP', 'No', 'snake_case', 'First', 'blah blah bio');"
 
 
 try:
