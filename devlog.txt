@@ -2,9 +2,12 @@
 ------------------------------------------------------------------
 chenK — 2018-01-03 14:05
 began creating html templates and forms
-------------------------------------------------------------------angelicaZ -- 2018-01-09 13:46:17
+
+angelicaZ -- 2018-01-09 13:46:17
 finished login system
 
 karenC -- 2018-01-09 23:32:02
 stylization
 
+angelicaZ -- 2018-01-10 05:35:20
+updated register form with quiz

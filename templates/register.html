@@ -4,49 +4,137 @@
 {% block body %}
   <body class = "root">
      <div class = "accountBox">
-      <form method="POST" action="/createaccount">
+
       <div class = "flash">
           {% set messages = get_flashed_messages() %}
           {% for message in messages %}
           {{message}}
           {% endfor %}
         </div>
-        Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
+
+      <form action="/">
+        Already have an account?
+        <input type="submit" value="Go Back!" class = "register right button">
+      </form>
       <br>
-      Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
       <br>
-      <input type="submit" value="Register" name="submit" class = "register right button">
-    </form>
-		<!--
-			
-			
+      
+      <h2> Please tell us about yourself! </h2>
+
+      <div class="form-group">
+      <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
+        <textarea class="form-control" id="inputName" rows="1" required></textarea>
+      </div>
+
+      <div class="form-group">
+      <b> <label for="sexualOrientation">Age</label> </b>
+        <select class="form-control" id="age" required>
+          {% for x in range(16, 100) %}
+          <option> {{x}} </option>
+            {% endfor %}
+        </select>
+      </div>
+
         <div class="form-group">
-          <label for="gender">Gender</label>
+        <b>  <label for="gender">Gender</label> </b>
           <select class="form-control" id="gender">
             <option>Male</option>
             <option>Female</option>
-            <option>Other</option>
           </select>
         </div>
+
         <div class="form-group">
-          <label for="sexualOrientation">Sexual Orientation</label>
-          <select class="form-control" id="sexualOrientation">
+        <b> <label for="sexualOrientation">Sexual Orientation</label> </b>
+          <select class="form-control" id="sexualOrientation" required>
             <option>Heterosexual</option>
             <option>Homosexual</option>
             <option>Bisexual</option>
           </select>
         </div>
+
         <div class="form-group">
-          <label for="inputBio">Write a personal biography.</label>
-          <textarea class="form-control" id="inputBio" rows="3"></textarea>
+        <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
+          <select class="form-control" id="lang" required>
+            <option>Java</option>
+            <option>Python</option>
+            <option>C</option>
+            <option>Javascript</option>
+            <option> Ruby </option>
+          </select>
         </div>
+
         <div class="form-group">
-           <label for="inputPhoto">Upload a photo</label>
-           <input type="file" class="form-control-file" id="inputPhoto">
+        <b> <label for="sort">Favorite Sorting Algorithm</label> </b>
+          <select class="form-control" id="sort" required>
+            <option>Merge sort</option>
+            <option>Heapsort</option>
+            <option>Quicksort</option>
+            <option>Counting sort</option>
+            <option>Bubble sort </option>
+          </select>
         </div>
-			
-			-->
-		
+
+        <div class="form-group">
+        <b> <label for="type"> Which type of  programming do you prefer? </label> </b>
+          <select class="form-control" id="type" required>
+            <option>Functional Programming (FP)</option>
+            <option>Object-Oriented Programming (OOP) </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="bitcoin"> If asked to, would you be able to explain bitcoin? </label> </b>
+          <select class="form-control" id="bitcoin" required>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not really, but I can make it sound like I know what I'm talking about</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="case"> How do you name things? </label> </b>
+          <select class="form-control" id="case" required>
+            <option>camelCase</option>
+            <option>snake_case</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="braces"> Which of these two  types of people are you? </label> </b>
+          <select class="form-control" id="braces" required>
+            <option>First</option>
+            <option>Second</option>
+          </select>
+        </div>
+        <img src=https://ganeshvjy.files.wordpress.com/2016/04/pic1.jpg?w=1200>
+        <br>
+        <br>
+
+        <div class="form-group">
+        <b>  <label for="inputBio">Write a personal biography (100 words minimum)</label> </b>
+          <textarea class="form-control" id="inputBio" rows="3" minlength="100" required></textarea>
+        </div>
+
+
+        <div class="form-group">
+        <b>   <label for="inputPhoto">Upload a photo of yourself!</label> </b>
+           <input type="file" class="form-control-file" id="inputPhoto" accept="image/jpeg, image/png" required>
+        </div>
+        <br>
+
+        <b> Finally, choose a username and password! </b>
+        <form method="POST" action="/createaccount">
+          Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
+          <br>
+          Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
+          <br>
+
+          <br>
+
+          <input type="submit" value="Register" name="submit" class = "register right button">
+
+</form>
+
   </div>
   </body>
 {% endblock %}
