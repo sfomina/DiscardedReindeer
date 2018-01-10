@@ -1,12 +1,15 @@
 .header {
     width:100%;
     padding: 10px;
-    background-color: #794209;
-    text-align: center;
+    background-color: black;
+    text-align: left;
 }
 
 .header2{
     background-color:black;
+    text-align: right;
+    width:100%;
+    padding:10px;
 }
 
 .pad{
