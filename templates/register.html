@@ -3,7 +3,7 @@
 
 {% block body %}
   <body class = "root">
-      <div class = "accountBox">
+     <div class = "accountBox">
       <form method="POST" action="/createaccount">
       <div class = "flash">
           {% set messages = get_flashed_messages() %}
@@ -11,14 +11,15 @@
           {{message}}
           {% endfor %}
         </div>
-        <div class="form-group">
-          <label for="registerUser">Username</label>
-          <input type="User" class="form-control" id="registerUser" placeholder="Username">
-        </div>
-        <div class="form-group">
-          <label for="registerPass">Password</label>
-          <input type="password" class="form-control" id="registerUser" placeholder="Password">
-        </div>
+        Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
+      <br>
+      Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
+      <br>
+      <input type="submit" value="Register" name="submit" class = "register right button">
+    </form>
+		<!--
+			
+			
         <div class="form-group">
           <label for="gender">Gender</label>
           <select class="form-control" id="gender">
@@ -43,7 +44,9 @@
            <label for="inputPhoto">Upload a photo</label>
            <input type="file" class="form-control-file" id="inputPhoto">
         </div>
-		<button type="submit" class="btn btn-primary mb-2">Submit</button>
+			
+			-->
+		
   </div>
   </body>
 {% endblock %}
