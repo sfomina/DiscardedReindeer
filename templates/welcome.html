@@ -1,56 +1,75 @@
 {% extends "base.html" %}
 
 {% block body %}
-<body class = "welcome">
-<div class = "centerBox">
-	<!--
-<div class = "teamName">
-<h2>Welcome {{ user }}</h2>
-</div>
-		-->
-<div class = "flash">
-    {% set messages = get_flashed_messages() %}
-    {% for message in messages %}
-    {{message}}
-    {% endfor %}
-</div>
-    <nav class="navbar navbar-inverse navbar-fixed-top" id="navb">
-      <div class="container-fluid">
-        <div class="navbar-header header" id="navb">
-          <a class="navbar-brand" href="#">Project name</a>
-	  	</div>
-        <div class= "header2" id="navbar">
-          <ul class="nav nav-pills nav-justified">
-            <li role = "presentation"><a href="#">Dashboard</a></li>
-            <li role = "presentation"><a href="#">Settings</a></li>
-            <li role = "presentation"><a href="#">Profile</a></li>
-            <li role = "presentation"><a href="#">Help</a></li>
-          </ul>
+  <body style = "background-color: gainsboro">
+      <div class = "header3">
+        <div id = "title">
+		  	PROJECT NAME
         </div>
-      </div>
-    </nav>
+        <div id= "subtitle">
+  		  	You had me at hello world...
+  	  	</div>
+		<ul class="nav nav-pills header2">
+		  <li role="presentation" class="active"><a href="#">Home</a></li>
+		  <li role="presentation"><a href="#">Profile</a></li>
+		  <li role="presentation"><a href="#">Help</a></li>
+		  <li role="presentation"><a href="#">Logout</a></li>
+		</ul>
+       </div>
+	   <!--
+	   <div class = "flash alert alert-info alert-dismissable" role="alert">
+		   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		   
+		   </div>
+		   -->
+    	   {% set messages = get_flashed_messages() %}
+    	   {% for message in messages %}
+    	   {{message}}
+   		{% endfor %}
+		
+	
+	<div class="container">
+	    <div class="row">
+	        <div class="col-md-3">
+				
+				<div class="wrapper">
+					<nav id ="sidebar">
+						<div class="sidebar-header">
+							<h3>Recent Matches</h3>
+						</div>
+	                <ul class="list-unstyled components ">
+	                        <li>STUFF!</li>
+							<li>STUFF!</li>
+	                </ul>
+	                </nav>
+	             </div>
+	        </div>
+	        <!--/span-->
+	        <div class="col-md-9">
+	            <div class="jumbotron">
+	                 <h1 class="page-header">Dashboard</h1>
 
+		            <div class="row placeholders">
+             
+		              <div class="col-xs-6 col-sm-3 placeholder">
+		                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+		                <h4>Name of person</h4>
+		                <span class="text-muted">Location/Miles Away</span>
+		              </div>
+		            </div>
+					<form>
+					<div class="form-group">
+						<button type="submit" value="no" class="btn btn-default">No!</button>
+						<button type="submit" value="yes" class="btn btn-default">Yes!</button>
+					</div>
+					</form>
+	            </div>
+           
+	        </div>
+	
+	
+	
 
-        <div class="col-sm-12 col-md-12">
-          <h1 class="page-header">Dashboard</h1>
-
-          <div class="row placeholders">
-
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          </div>
-
-
-
-</div>
-<form method="post">
-<div style = "float:right;">Logout!
-  <input type="submit" name="logout" value="Log Out" class = "logout right button" formaction="/logout">
-</div>
-</form>
 </div>
 </body>
 {% endblock %}

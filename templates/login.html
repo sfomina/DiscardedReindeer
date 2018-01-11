@@ -2,33 +2,59 @@
 
 
 {% block body %}
-  <body class = "root">
-      <img style="width: 240px; display: block; margin: 0 auto;" src = "{{ url_for('static',filename='images/tacoCat.png') }}">
-      <div class = "centerBox">
-        <div>
-          Karen Chen, Sasha Fomina, Angelica Zverovich, David Doktorman
+  <body style = "background-color: gainsboro">
+      <div class = "header3">
+        <div id = "title">
+		  	PROJECT NAME
         </div>
-        </div>
-      <div class = "welcomeTitle" style = "overflow:hidden">
-        <p class="teamName">
-          Welcome!
-        </p>
-
-        <div class = "accountBox" style = "overflow:hidden; float:right;" >
-        <form style ="float:right" method="POST" action="/auth">
-          <div class = "flash">
-              {% set messages = get_flashed_messages() %}
-              {% for message in messages %}
-              {{message}}
-              {% endfor %}
-          </div>
-          Username: <input type ="text" name= "user" class ="accountField" > <br>
-          Password : <input type ="password" name = "pw" class ="accountField">
-          <br>
-            <input type="submit" class = "login right button" value = "Log In">
-            <input type="submit" class = "register left button" formaction="/register" value="Register">
-          </form>
-        </div>
-        </div>
-        </body>
+        <div id= "subtitle">
+  		  	You had me at hello world...
+  	  	</div>
+		<div id = "sub">
+			Karen Chen, Sasha Fomina, Angelica Zverovich, David Doktorman
+		</div>
+       </div>
+	   
+	   <div class="floatbody">
+		   <div class="container">
+			   <div class="row justify-content-md-center">
+				   <div class="col-lg-1">
+					   
+				   </div>
+				   <div class="col-lg-5">
+					   <div class="textb">
+						   Info about the website here blah blah <br>
+						   blah blah <br>
+						   blah blah <br>
+						   blah blah
+					   </div>
+				   </div>
+				   <div class = "col-lg-5">			   
+        			   <div class = "logbox">
+       					<form style ="float:center" method="POST" action="/auth">
+         				   <div class = "flash">
+            				   {% set messages = get_flashed_messages() %}
+             				  {% for message in messages %}
+             				 {{message}}
+             				{% endfor %}
+         			   		</div>
+          				  Username: <input type ="text" name= "user" class ="accountField" > <br>
+         				 Password : <input type ="password" name = "pw" class ="accountField">
+         				<br>
+            			<input type="submit" class = "login right button" value = "Log In">
+           			 <input type="submit" class = "register left button" formaction="/register" value="Register">
+          	   		</form>
+       		 		</div>
+       		 	</div>
+			   <div class="col-lg-1">
+				   
+			   </div>
+			</div>
+		</div>
+		</div>
+		
+		<div class="floatbody">
+			<img src="static/computerlove.gif" width=70%>
+		</div>
+ </body>
 {% endblock %}
