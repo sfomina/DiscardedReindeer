@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 import os, sqlite3, hashlib
+from utils import api_library 
 
 SUCCESS = 1
 BAD_PASS = -1
@@ -9,6 +10,8 @@ form_site = Flask(__name__)
 form_site.secret_key = os.urandom(64)
 
 execfile("db_builder.py")
+
+#===========HELPERS=============================================
 
 #encrypts password
 def encrypt_password(password):
@@ -41,6 +44,7 @@ def check_newuser(username):
     if username in users.keys():
         return BAD_USER
     return SUCCESS
+#============================================
 
 @form_site.route('/', methods=['POST', 'GET'])
 #login page if user is not in session, otherwise welcome
@@ -65,8 +69,8 @@ def create_account():
     password = request.form['pw']
     name = request.form['inputName']
     age = request.form['age']
+    prefGender = request.form['prefGender']
     gender = request.form['gender']
-    sexOren = request.form['sexOren']
     lang = request.form ['lang']
     sort = request.form['sort']
     progType = request.form['type']
@@ -78,9 +82,14 @@ def create_account():
     users = user_dict()
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age, gender, sexOren, lang, sort, progType, bitcoin, case, braces , bio ))
+            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio ))
         users[username] = password
+
+        #form personality profile 
+        api_library.create_profile(username, bio)
+        
         flash(username + " registered.")
+        
     elif result == BAD_USER:
         flash("That username is already in use. Try another one")
     return redirect(url_for('root'))
