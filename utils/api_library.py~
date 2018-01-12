@@ -1,7 +1,7 @@
 import json, requests, urllib2
 import random
 from requests.auth import HTTPBasicAuth
-import dbLibrary.py 
+import dbLibrary
 
 
 
@@ -23,13 +23,13 @@ def create_profile(username, bio):
 
     #index big 5 emotions
     openn = personality_results["personality"][0]["percentile"]
-    print open
+    #print open
     
     consc = personality_results["personality"][1]["percentile"]
-    print consc
+    #print consc
     
     extra =  personality_results["personality"][2]["percentile"]
-    print extra 
+    #print extra 
     
     agree =  personality_results["personality"][3]["percentile"]
     
@@ -37,21 +37,21 @@ def create_profile(username, bio):
     
     #open database
     db = dbLibrary.openDb("../dating.db")
-    cursor = createCursor(db)
+    cursor = dbLibrary.createCursor(db)
 
     #insert into personality table name and your scores
     dbLibrary.insertRow("personality" , ["username" , "open" , "consc" , "extra", "agree" , "emotRange"] , [username, openn , consc , extra , agree, emot_range], cursor)
     
     #close database
-    commit(db)
-    closeFile(db)
+    dbLibrary.commit(db)
+    dbLibrary.closeFile(db)
     
     
 
 #returns name of potential match or 0 if no potential matches
 def find_match(username, prefGender,gender):
     db = dbLibrary.openDb("../dating.db")
-    cursor = createCursor(db)
+    cursor = dbLibrary.createCursor(db)
 
     my_open = cursor.execute("SELECT open FROM personality WHERE username = '" + username + "';")
     my_consc = cursor.execute("SELECT consc FROM personality WHERE username = '" + username + "';")
@@ -90,7 +90,10 @@ def find_match(username, prefGender,gender):
         #field posMatch
         if percent_similarity >= 60:
             update ("users" , "posMatch" , "'" + user + "'", "username = '" + username + "'")
+            dbLibrary.commit(db)
+            dbLibrary.closeFile(db)
             return user
+    dbLibrary.closeFile(db)
     return 0
             
         

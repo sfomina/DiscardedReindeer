@@ -36,7 +36,7 @@ def create_profile(username, bio):
     emot_range =  personality_results["personality"][4]["percentile"]
     
     #open database
-    db = dbLibrary.openDb("../dating.db")
+    db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
 
     #insert into personality table name and your scores
