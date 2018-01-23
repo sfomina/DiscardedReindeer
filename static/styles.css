@@ -37,6 +37,8 @@
     background-color: lightsteelblue;
     font-color: black;
     border: 1px solid;
+    padding: 5px;
+    text-align: center;
 }
 
 .logbox{
@@ -63,6 +65,10 @@
     text-align:center;
 }
 
+.small{
+    width:40%;
+    height:40%;
+}
 
 #head1{
     text-align:center;

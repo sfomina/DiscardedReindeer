@@ -2,6 +2,23 @@
 
 {% block body %}
   <body style = "background-color: gainsboro">
+	  
+	<script type="text/javascript">
+	    function change(text)
+	        {
+	            var display = document.getElementById('textinfo');
+	            display.innerHTML = "";
+	            display.innerHTML = text;
+	        }
+	          function changeback(text)
+	        {
+	            var display = document.getElementById('textinfo');
+	            display.innerHTML = "";
+	            display.innerHTML = text;
+	        }
+	</script>
+	  
+	  
       <div class = "header3">
         <div id = "title">
 		  	PROJECT NAME
@@ -11,9 +28,8 @@
   	  	</div>
 		<ul class="nav nav-pills header2">
 		  <li role="presentation" class="active"><a href="#">Home</a></li>
-		  <li role="presentation"><a href="#">Profile</a></li>
-		  <li role="presentation"><a href="#">Help</a></li>
-		  <li role="presentation"><a href="#">Logout</a></li>
+		  <li role="presentation"><a href="/matches">Matches</a></li>
+		  <li role="presentation"><a href="/logout">Logout</a></li>
 		</ul>
        </div>
 	   <!--
@@ -22,10 +38,12 @@
 		   
 		   </div>
 		   -->
+		<div class = "flash">
     	   {% set messages = get_flashed_messages() %}
     	   {% for message in messages %}
     	   {{message}}
    		{% endfor %}
+		</div>
 		
 	
 	<div class="container">
@@ -34,7 +52,7 @@
 				
 				<div class="wrapper">
 					<nav id ="sidebar">
-						<div class="sidebar-header">
+						<div class="sidebar-header pad">
 							<h3>Recent Matches</h3>
 						</div>
 	                <ul class="list-unstyled components ">
@@ -45,31 +63,37 @@
 	             </div>
 	        </div>
 	        <!--/span-->
+			
 	        <div class="col-md-9">
-	            <div class="jumbotron">
-	                 <h1 class="page-header">Dashboard</h1>
-
+	            <div class="jumbotron pad">
 		            <div class="row placeholders">
-             
-		              <div class="col-xs-6 col-sm-3 placeholder">
+		              <div class="col-xs-6 col-sm-3 placeholder mx-auto">
 		                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
 		                <h4>Name of person</h4>
-		                <span class="text-muted">Location/Miles Away</span>
+		                <span class="text-muted">Personal Bio</span>
+						<div onmouseover="change('MORE INFO')" onmouseout="changeback('Hover for more information')" >
+						<div id="textinfo">
+						 Hover for more information
+						</div>
 		              </div>
 		            </div>
+					<br><br>
 					<form>
 					<div class="form-group">
-						<button type="submit" value="no" class="btn btn-default">No!</button>
-						<button type="submit" value="yes" class="btn btn-default">Yes!</button>
+						<div class="row">
+							<div class="col-md-2"></div>
+						<div class= "col-md-4">
+						<button onclick="myFunction()"><img class="small" src="/static/nolovelogo.png"></button>
+						</div>
+						<div class="col-md-4">
+						<button onclick="myFunction()"><img class="small" src="/static/lovelogo.png"></button>
+						</div>
+						<div class="col-md-2"></div>
+						</div>
 					</div>
 					</form>
 	            </div>
-           
 	        </div>
-	
-	
-	
-
-</div>
+		</div>
 </body>
 {% endblock %}

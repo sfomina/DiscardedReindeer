@@ -1,13 +1,20 @@
-from flask import Flask, render_template, request, session, redirect, url_for, flash
+from flask import Flask, render_template, request, session, redirect, url_for, flash, send_from_directory
 import os, sqlite3, hashlib
-from utils import api_library 
+from utils import api_library
+from werkzeug.utils import secure_filename
 
 SUCCESS = 1
 BAD_PASS = -1
 BAD_USER = -2
 
+UPLOAD_FOLDER = static
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+
 form_site = Flask(__name__)
 form_site.secret_key = os.urandom(64)
+form_site.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 execfile("db_builder.py")
 
@@ -44,6 +51,11 @@ def check_newuser(username):
     if username in users.keys():
         return BAD_USER
     return SUCCESS
+
+#checks for allowed files
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 #============================================
 
 @form_site.route('/', methods=['POST', 'GET'])
@@ -57,10 +69,18 @@ def root():
 @form_site.route('/register', methods=['POST', 'GET'])
 #register page is user is not in session, otherwise root
 def register():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
+            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
     if 'user' not in session:
         return render_template('register.html', title="Register")
     else:
         return redirect( url_for('root') )
+
+
 
 @form_site.route('/createaccount', methods=['POST', 'GET'])
 #creates an account and runs encryption function on password
@@ -85,11 +105,11 @@ def create_account():
             c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio ))
         users[username] = password
 
-        #form personality profile 
+        #form personality profile
         api_library.create_profile(username, bio)
-        
+
         flash(username + " registered.")
-        
+
     elif result == BAD_USER:
         flash("That username is already in use. Try another one")
     return redirect(url_for('root'))
