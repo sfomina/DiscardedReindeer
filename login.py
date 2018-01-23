@@ -7,12 +7,13 @@ SUCCESS = 1
 BAD_PASS = -1
 BAD_USER = -2
 
+UPLOAD_FOLDER = static
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+
 form_site = Flask(__name__)
 form_site.secret_key = os.urandom(64)
 form_site.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-UPLOAD_FOLDER = <upload_path>
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 
 execfile("db_builder.py")
@@ -73,7 +74,7 @@ def register():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
-            #return redirect(url_for('uploaded_file', filename=filename))
+            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
     if 'user' not in session:
         return render_template('register.html', title="Register")
     else:
@@ -152,9 +153,3 @@ if __name__ == '__main__':
 
 db.commit()
 db.close()
-
-
-
-#@form_site.route('/uploads/<filename>')
-#def uploaded_file(filename):
-    #return send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
