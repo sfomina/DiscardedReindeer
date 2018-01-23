@@ -17,33 +17,6 @@
 			<div class="row">
 				<div class="col-md-6 mx-auto">
 
-					<div class = "textb">
-      	 			   <form action="/">
-       	  				 Already have an account?
-        				 <br><input type="submit" value="Go Back!" class = "register right button">
-     	 				</form>
-					</div>
-
-      			  <br>
-      				<br>
-	  			  <form method="POST" action="/createaccount">
-     				 <h2 class="centered" id="title">Tell us about yourself! </h2>
-
-      			   		<div class="form-group">
-      					  <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
-       				   <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
-     			  		</div>
-
-      				  <div class="form-group">
-     					 <b> <label for="age">Age</label> </b>
-       				  <select class="form-control" name="age" id="age" required>
-         				 {% for x in range(16, 100) %}
-         				<option> {{x}} </option>
-           			 	{% endfor %}
-        			</select>
-     		   </div>
-
-<<<<<<< HEAD
       <form action="/">
         Already have an account?
         <input type="submit" value="Go Back!" class = "register right button">
