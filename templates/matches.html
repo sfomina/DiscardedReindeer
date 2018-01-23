@@ -10,5 +10,16 @@
         </div>
         <div id= "subtitle">
   		  	You had me at hello world...
+		</div>
+		
+		<div class="container">
+		{% for match in matches %}
+			<div class="row">
+				<div class="col-md-4 mx-auto">
+					{{match['Name']}}
+				</div>
+			</div>
+		{% endfor %}
+		</div>
   	</div>
 </body>
