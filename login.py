@@ -7,7 +7,7 @@ SUCCESS = 1
 BAD_PASS = -1
 BAD_USER = -2
 
-UPLOAD_FOLDER = static
+UPLOAD_FOLDER = "static"
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
 
@@ -69,12 +69,6 @@ def root():
 @form_site.route('/register', methods=['POST', 'GET'])
 #register page is user is not in session, otherwise root
 def register():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
-            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
     if 'user' not in session:
         return render_template('register.html', title="Register")
     else:
@@ -100,6 +94,12 @@ def create_account():
     bio = request.form['bio']
     result = check_newuser(username)
     users = user_dict()
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
+            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
     if result == SUCCESS:
         with db:
             c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio ))
