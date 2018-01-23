@@ -3,7 +3,7 @@
 
 {% block body %}
   <body class = "root">
-     <div class = "accountBox">
+     <div class = "floatbody">
 
       <div class = "flash">
           {% set messages = get_flashed_messages() %}
@@ -11,29 +11,37 @@
           {{message}}
           {% endfor %}
         </div>
+		<br>
+		
+		<div class ="container">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+		
+					<div class = "textb">
+      	 			   <form action="/">
+       	  				 Already have an account?
+        				 <br><input type="submit" value="Go Back!" class = "register right button">
+     	 				</form>
+					</div>
+					
+      			  <br>
+      				<br>
+	  			  <form method="POST" action="/createaccount">
+     				 <h2 class="centered" id="title">Tell us about yourself! </h2>
 
-      <form action="/">
-        Already have an account?
-        <input type="submit" value="Go Back!" class = "register right button">
-      </form>
-      <br>
-      <br>
-<form method="POST" action="/createaccount">
-      <h2> Please tell us about yourself! </h2>
+      			   		<div class="form-group">
+      					  <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
+       				   <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
+     			  		</div>
 
-      <div class="form-group">
-      <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
-        <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
-      </div>
-
-      <div class="form-group">
-      <b> <label for="age">Age</label> </b>
-        <select class="form-control" name="age" id="age" required>
-          {% for x in range(16, 100) %}
-          <option> {{x}} </option>
-            {% endfor %}
-        </select>
-      </div>
+      				  <div class="form-group">
+     					 <b> <label for="age">Age</label> </b>
+       				  <select class="form-control" name="age" id="age" required>
+         				 {% for x in range(16, 100) %}
+         				<option> {{x}} </option>
+           			 	{% endfor %}
+        			</select>
+     		   </div>
 	  
 	   <div class="form-group">
         <b>  <label for="gender">Your Gender</label> </b>
@@ -44,7 +52,7 @@
         </div>
 
         <div class="form-group">
-        <b>  <label for="prefGender">Prefered Gender</label> </b>
+        <b>  <label for="prefGender">Preferred Partner Gender</label> </b>
           <select class="form-control" name="prefGender" id="prefGender">
             <option>Male</option>
             <option>Female</option>
@@ -115,7 +123,7 @@
             <option>Second</option>
           </select>
         </div>
-        <img src=https://ganeshvjy.files.wordpress.com/2016/04/pic1.jpg?w=1200>
+        <img src="/static/formpic.jpg" width="70%">
         <br>
         <br>
 
@@ -126,24 +134,25 @@
 
 
         <div class="form-group">
-        <b>   <label for="inputPhoto">Upload a photo of yourself!</label> </b>
-           <input type="file" class="form-control-file" name="photo" id="inputPhoto" accept="image/jpeg, image/png" required>
+        <b>   <label for="inputPhoto" class="centered">Upload a photo of yourself!</label> </b><br>
+           <div class="centered"><input type="file" class="form-control-file" name="photo" id="inputPhoto" accept="image/jpeg, image/png" required></div>
         </div>
         <br>
 
-        <b> Finally, choose a username and password! </b>
+        <b> Finally, choose a username and password! </b><br>
 
           Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
-          <br>
+          <br><br>
           Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
           <br>
 
           <br>
 
           <input type="submit" value="Register" name="submit" class = "register right button">
-
-</form>
-
+	  </form>
+  </div>
+</div>
+</div>
   </div>
   </body>
 {% endblock %}
