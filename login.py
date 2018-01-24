@@ -165,6 +165,7 @@ def welcome():
             name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
+            #percent_sim = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0] 
             print image
 
             print "\n\n"
@@ -183,11 +184,36 @@ def logout():
         session.pop('user')
     return redirect( url_for('root') )
 
+@form_site.route('/left', methods=['POST', "get"])
+def left():
+    username = session['user']
+    adjust_formula(username)
+    db = dbLibrary.openDb("dating.db")
+    cursor = dbLibrary.createCursor(db)
+    dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
+    dbLibrary.commit(db)
+    dbLibrary.closeFile(db)
+    return redirect(url_for('welcome'))
+
+@form_site.route('/right', methods=['POST', "get"])
+def right():
+    username = session['user']
+    db = dbLibrary.openDb("dating.db")
+    cursor = dbLibrary.createCursor(db)
+    posMatch = cursor.execute("SELECT posMatch FROM users WHERE username ='" + username + "';")
+    like(username, posMatch)
+    dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
+    dbLibrary.commit(db)
+    dbLibrary.closeFile(db)
+    return redirect(url_for('welcome'))
+
 @form_site.route('/', defaults={'path': ''})
 @form_site.route('/<path:path>')
 def catch_all(path):
     flash ("Sorry! The page you tried to visit does not exist!")
     return redirect(url_for('root'))
+
+
 
 
 if __name__ == '__main__':
