@@ -202,7 +202,7 @@ def left():
     api_library.adjust_formula(username)
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
-    dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
+    dbLibrary.update("users" , "posMatch" , "'none'" , "username = '" + username + "'", cursor)
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
     return redirect(url_for('welcome'))
@@ -212,9 +212,9 @@ def right():
     username = session['user']
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
-    posMatch = cursor.execute("SELECT posMatch FROM users WHERE username ='" + username + "';")
+    posMatch = cursor.execute("SELECT posMatch FROM users WHERE username ='" + username + "';").fetchall()[0][0]
     api_library.like(username, posMatch)
-    dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
+    dbLibrary.update("users" , "posMatch" , "'none'" , "username = '" + username + "'", cursor )
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
     return redirect(url_for('welcome'))
