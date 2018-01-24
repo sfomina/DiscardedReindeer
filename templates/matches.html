@@ -29,16 +29,12 @@
 							<th>Phone Number</th>
 						</TR>
 						
-						{% for match in matches %}
-						{% for image in images %}
-						{% for number in numbers %}
+						{% for i in indexes %}
 							<TR>
-								<TD><img src={{image}} height="100px" width="100px"></TD>
-								<TD>{{match}}</TD>
-								<TD>{{number}}</TD>
+								<TD><img src={{images[i]}} height="100px" width="100px"></TD>
+								<TD>{{matches[i]}}</TD>
+								<TD>{{numbers[i]}}</TD>
 							</TR>
-						{% endfor %}
-						{% endfor %}
 						{% endfor %}
 					</table>
 			<!--
