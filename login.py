@@ -98,7 +98,9 @@ def create_account():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = username; 
+            extension = file.filename.split(".")[1]
+            filename = username + "." + extension;
+            print filename
             file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
             img_name = filename
     if result == SUCCESS:
@@ -113,6 +115,7 @@ def create_account():
             dbLibrary.update("users", "secured" , "''", "username = '" + username + "'", c)
             dbLibrary.insertRow("formula", ["username", "openCo" , "conscCo", "extraCo" , "agreeCo", "emotRangeCo", "challengeCo", "curiosityCo", "excitementCo", "harmonyCo", "idealCo", "libertyCo", "loveCo", "practicalityCo", "expressionCo", "stabilityCo", "structureCo", "csCo"],[ username , 1 ,1 ,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.1] ,c)
         api_library.create_profile(username, bio)
+        api_library.find_match(username)
         flash(username + " registered.")
 
     elif result == BAD_USER:
@@ -151,8 +154,18 @@ def welcome():
         return redirect( url_for('root') )
     else:
         username = session['user']
-        print "\n\nYOUR MATCH: " + str(api_library.find_match(username)) + "\n\n"
-        return render_template('welcome.html', user=session['user'], title='Welcome')
+        posMatch = api_library.find_match(username)
+        if posMatch == None:
+            api_library.find_match(username)
+        if posMatch != None:
+            name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';")
+            bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';")
+            image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';" + ".jpg")
+            #print name
+            #print "\n\nYOUR MATCH: " + str(api_library.find_match(username)) + "\n\n"
+            return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = image)
+        else:
+            return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
 
 @form_site.route('/logout', methods=['POST', "get"])
 #removes user from session

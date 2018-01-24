@@ -27,7 +27,7 @@ insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', '18',
 
 #create formula table
 
-insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'));"
+#insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'));"
 
 try:
     c.execute(create_users)

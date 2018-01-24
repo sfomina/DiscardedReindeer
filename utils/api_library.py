@@ -311,7 +311,7 @@ def find_match(username):
     dbLibrary.update ("users" , "posMatch" , "'none'", "username = '" + username + "'", cursor)
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
-    return "none"
+    return  None
 
 #===================================================================================================
 
@@ -388,10 +388,10 @@ def like(username, liked_match):
 
     secured_str = cursor.execute("SELECT secured FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     secured_list = secured_str.split(",")
-    
+
     their_secured_str = cursor.execute("SELECT secured FROM users WHERE username = '" + liked_match + "';").fetchall()[0][0]
     their_secured_list = their_secured_str.split(",")
-    
+
     liked_list.append(liked_match)
 
     their_liked_str = cursor.execute("SELECT liked FROM users WHERE username = '" + liked_match + "';").fetchall()[0][0]
@@ -403,13 +403,10 @@ def like(username, liked_match):
         their_secured_str = ",".join(their_secured_list)
         dbLibrary.update("users" , "secured", "'" + secured_str + "'","username = '" + username + "'", cursor )
         dbLibrary.update("users" , "secured", "'" + their_secured_str + "'","username = '" + liked_match + "'", cursor )
-        
+
 
     liked_str = ",".join(liked_list)
     dbLibrary.update("users" , "liked", "'" + liked_str + "'","username = '" + username + "'", cursor )
 
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
-    
-        
-
