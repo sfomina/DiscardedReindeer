@@ -176,6 +176,18 @@ def welcome():
         else:
             return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
 
+@form_site.route('/matches', methods=['POST', "get"])
+def matches():
+    matches = c.execute("SELECT secured FROM users WHERE username = '" + session['user'] + "';").fetchall()[0][0]
+    #print "matches: " + matches
+    matches = matches.split(',')
+    matches = filter (None, matches)
+    #print len(matches)
+    if (len(matches) == 0):
+        flash("There are no matches to display, yet. Keep swiping!")
+    return render_template('matches.html', matches = matches)
+
+
 @form_site.route('/logout', methods=['POST', "get"])
 #removes user from session
 def logout():
