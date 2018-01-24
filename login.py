@@ -199,7 +199,7 @@ def logout():
 @form_site.route('/left', methods=['POST', "get"])
 def left():
     username = session['user']
-    adjust_formula(username)
+    api_library.adjust_formula(username)
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
     dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
@@ -213,7 +213,7 @@ def right():
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
     posMatch = cursor.execute("SELECT posMatch FROM users WHERE username ='" + username + "';")
-    like(username, posMatch)
+    api_library.like(username, posMatch)
     dbLibrary.update("users" , "posMatch" , "none" , "username = '" + username + "';")
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
