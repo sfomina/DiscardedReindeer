@@ -17,67 +17,46 @@
 			<div class="row">
 				<div class="col-md-6 mx-auto">
 
-      <form action="/">
-        Already have an account?
-        <input type="submit" value="Go Back!" class = "register right button">
-      </form>
-      <br>
-      <br>
-<form method="POST" action="/createaccount">
-      <h2> Please tell us about yourself! </h2>
+					<div class = "textb">
+      	 			   <form action="/">
+       	  				 Already have an account?
+        				 <br><input type="submit" value="Go Back!" class = "register right button">
+     	 				</form>
+					</div>
 
-      <div class="form-group">
-      <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
-        <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
-      </div>
+      			  <br>
+      				<br>
+	  			  <form method="POST" action="/createaccount" enctype = "multipart/form-data">
+     				 <h2 class="centered" id="title">Tell us about yourself! </h2>
 
-      <div class="form-group">
-      <b> <label for="age">Age</label> </b>
-        <select class="form-control" name="age" id="age" required>
-          <option value="" selected disabled hidden> Choose one </option>
-          {% for x in range(17, 100) %}
-          <option> {{x}} </option>
-            {% endfor %}
-        </select>
-      </div>
+      			   		<div class="form-group">
+      					  <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
+       				   <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
+     			  		</div>
 
-      <div class="form-group">
-      <b> <label for="minage">Preferred Minimum Age</label> </b>
-      <select class="form-control" name="minage" id="minage" required>
-        <option value="" selected disabled hidden> Choose one </option>
-        {% for x in range(17, 100) %}
-        <option> {{x}} </option>
-          {% endfor %}
-      </select>
-      </div>
-
-      <div class="form-group">
-      <b> <label for="maxage">Preferred Maximum Age</label> </b>
-      <select class="form-control" name="maxage" id="maxage" required>
-        <option value="" selected disabled hidden> Choose one </option>
-        {% for x in range(17, 100) %}
-        <option> {{x}} </option>
-          {% endfor %}
-      </select>
-      </div>
-
+      				  <div class="form-group">
+     					 <b> <label for="age">Age</label> </b>
+       				  <select class="form-control" name="age" id="age" required>
+         				 {% for x in range(16, 100) %}
+         				<option> {{x}} </option>
+           			 	{% endfor %}
+        			</select>
+     		   </div>
+           
 
 	   <div class="form-group">
         <b>  <label for="gender">Your Gender</label> </b>
           <select class="form-control" name="gender" id="gender">
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Male</option>
             <option>Female</option>
           </select>
-    </div>
+        </div>
 
         <div class="form-group">
         <b>  <label for="prefGender">Preferred Partner Gender</label> </b>
           <select class="form-control" name="prefGender" id="prefGender">
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Male</option>
             <option>Female</option>
-            <option>Both</option>
           </select>
         </div>
 
@@ -92,9 +71,8 @@
         </div>
 -->
         <div class="form-group">
-        <b> <label for="lang">Favorite Programming Language</label> </b>
+        <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
           <select class="form-control" name="lang" id="lang" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Java</option>
             <option>Python</option>
             <option>C</option>
@@ -106,7 +84,6 @@
         <div class="form-group">
         <b> <label for="sort">Favorite Sorting Algorithm</label> </b>
           <select class="form-control" name= "sort" id="sort" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Merge sort</option>
             <option>Heapsort</option>
             <option>Quicksort</option>
@@ -118,7 +95,6 @@
         <div class="form-group">
         <b> <label for="type"> Which type of  programming do you prefer? </label> </b>
           <select class="form-control" name="type" id="type" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Functional Programming (FP)</option>
             <option>Object-Oriented Programming (OOP) </option>
           </select>
@@ -127,7 +103,6 @@
         <div class="form-group">
         <b> <label for="bitcoin"> If asked to, would you be able to explain bitcoin? </label> </b>
           <select class="form-control" name= "bitcoin" id="bitcoin" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>Yes</option>
             <option>No</option>
             <option>Not really, but I can make it sound like I know what I'm talking about</option>
@@ -137,7 +112,6 @@
         <div class="form-group">
         <b> <label for="case"> How do you name things? </label> </b>
           <select class="form-control" name= "case" id="case" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>camelCase</option>
             <option>snake_case</option>
           </select>
@@ -146,7 +120,6 @@
         <div class="form-group">
         <b> <label for="braces"> Which of these two  types of people are you? </label> </b>
           <select class="form-control" name ="braces" id="braces" required>
-            <option value="" selected disabled hidden> Choose one </option>
             <option>First</option>
             <option>Second</option>
           </select>
@@ -163,8 +136,9 @@
 
         <div class="form-group">
         <b><label for="inputPhoto" class="centered">Upload a photo of yourself!</label> </b><br>
-           <div class="centered"> <form action = "http://localhost:5000/uploader" method = "POST"
-         enctype = "multipart/form-data"> <input type="file" class="form-control-file" name="file" id="inputPhoto" accept="image/jpeg, image/png" required/><input type = "submit"/> </form></div>
+           <div class="centered">
+             <input type="file" class="form-control-file" name="file" id="inputPhoto" accept="image/jpeg, image/png, image/jpg" required/>
+         </div>
         </div>
         <br>
 
