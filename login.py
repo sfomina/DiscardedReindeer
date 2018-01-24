@@ -156,18 +156,18 @@ def welcome():
         username = session['user']
         db = dbLibrary.openDb("dating.db")
         cursor = dbLibrary.createCursor(db)
-        posMatch = cursor.execute("SELECT posMatch FROM users WHERE username = '" + username + "';").fetchall()[0][0] 
+        posMatch = cursor.execute("SELECT posMatch FROM users WHERE username = '" + username + "';").fetchall()[0][0]
         if posMatch == "none":
             posMatch = api_library.find_match(username)
 
         if posMatch != "none":
-            name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
-            bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
-            image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';" + ".jpg").fetchall()[0][0]
+            name = c.execute("SELECT name FROM users WHERE username = " + posMatch + ";").fetchall()[0][0]
+            bio =  c.execute("SELECT bio FROM users WHERE username = " + posMatch + ";").fetchall()[0][0]
+            image = c.execute("SELECT img_name FROM users WHERE username =" + posMatch + ";" + ".jpg").fetchall()[0][0]
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
- 
+
             return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = image)
         else:
             return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
