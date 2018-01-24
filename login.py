@@ -191,11 +191,12 @@ def matches():
         names.append( c.execute("SELECT name FROM users WHERE username = '" + match + "';").fetchall()[0][0])
         images.append("static/" + (c.execute("SELECT img_name FROM users WHERE username = '" + match + "';").fetchall()[0][0]))
         numbers.append(c.execute("SELECT phone FROM users WHERE username = '" + match + "';").fetchall()[0][0])
-        
+
+    indexes = range(len(matches))
     #print len(matches)
     if (len(matches) == 0):
         flash("There are no matches to display, yet. Keep swiping!")
-    return render_template('matches.html', matches = names, images = images, numbers = numbers)
+    return render_template('matches.html', matches = names, images = images, numbers = numbers, indexes = indexes)
 
 
 @form_site.route('/logout', methods=['POST', "get"])
