@@ -164,15 +164,16 @@ def welcome():
         if posMatch != "none":
             name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
+            percent = c.execute("SELECT percent FROM users WHERE username = '" + session['user'] + "';").fetchall()[0][0]
             image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
-            #percent_sim = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0] 
+            #percent_sim = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             print image
 
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
 
-            return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = "static/" + image)
+            return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, percent = percent, image = "static/" + image)
         else:
             return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
 
