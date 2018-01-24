@@ -24,3 +24,6 @@ lots of form making with html and css
 
 davidD -- 2018-01-23 17:20:00
 implemented file uploading
+
+davidD -- 2018-01-23 23:55:00
+implemented face++ api stuff and finalized file uploading

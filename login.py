@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash, send_from_directory
 import os, sqlite3, hashlib
-from utils import api_library
+from utils import api_library, dbLibrary
 from werkzeug.utils import secure_filename
 
 SUCCESS = 1
@@ -94,20 +94,23 @@ def create_account():
     bio = request.form['bio']
     result = check_newuser(username)
     users = user_dict()
+    img_name = ''
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
-            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
+            img_name = filename
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio ))
-        users[username] = password
+            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
 
-        #form personality profile
+            users[username] = password
+            #form personality profile
+            dbLibrary.update("users", "suggested" , "''", "username = '" + username + "'", c)
+            dbLibrary.update("users", "queue" , "''","username = '" + username + "'", c)
+            dbLibrary.insertRow("formula", ["username", "openCo" , "conscCo", "extraCo" , "agreeCo", "emotRangeCo", "challengeCo", "curiosityCo", "excitementCo", "harmonyCo", "idealCo", "libertyCo", "loveCo", "practicalityCo", "expressionCo", "stabilityCo", "structureCo", "csCo"],[ username , 1 ,1 ,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.1] ,c)
         api_library.create_profile(username, bio)
-
         flash(username + " registered.")
 
     elif result == BAD_USER:
@@ -131,12 +134,22 @@ def auth():
         flash("Incorrect Username.")
     return redirect(url_for('root'))
 
+
+#FACE++API STUFF:
+#url = "https://api-us.faceplusplus.com/facepp/v3/compare?api_key=" + <api_key> + "&api_secret=" + <api_secret> + "&image_file1=" + send_from_directory(form_site.config['UPLOAD_FOLDER'], <IMG_NAME OF TARGET USER>) + "&img_file2=" + send_from_directory(form_site.config['UPLOAD_FOLDER'], <IMG_NAME OF TARGET USER>)
+#u = urllib2.urlopen(url)
+#contents = u.read()
+#similarity = json.loads(contents)['confidence']
+
+
 @form_site.route('/welcome', methods=['POST', 'GET'])
 #welcomes user or redirects back to root if logged out
 def welcome():
     if 'user' not in session:
         return redirect( url_for('root') )
     else:
+        username = session['user']
+        print "\n\nYOUR MATCH: " + str(api_library.find_match(username)) + "\n\n"
         return render_template('welcome.html', user=session['user'], title='Welcome')
 
 @form_site.route('/logout', methods=['POST', "get"])
