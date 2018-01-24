@@ -17,6 +17,8 @@ from werkzeug.utils import secure_filename
 
 ## Instructions for Use: ##
 
+0. download key.py and place it in the root directory
+
 1. ``` python login.py ``` 
 
 2. access page on local host 5000 
