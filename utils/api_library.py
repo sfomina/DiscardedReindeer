@@ -341,7 +341,7 @@ def adjust_formula(username):
     my_strucd = cursor.execute("SELECT strucd FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     my_csPercent = cursor.execute("SELECT csPercent FROM users WHERE username = '" + username + "';").fetchall()[0][0]
 
-    differences = [my_od, my_cd, my_ed, my_ad, my_emd, my_challd, my_curd, my_exd, my_hd, my_ideald, my_libd, my_lod, my_pd, my_eprd, my_stabd, my_strucd]
+    differences = [my_od, my_cd, my_ed, my_ad, my_emd, my_challd, my_curd, my_exd, my_hd, my_ideald, my_libd, my_lod, my_pd, my_exprd, my_stabd, my_strucd]
     coefs = ["openCo", "conscCo","extraCo","agreeCo","emotRangeCo","challengeCo","curiosityCo","excitementCo", "harmonyCo","idealCo","libertyCo","loveCo", "practicalityCo", "expressionCo","stabilityCo","structureCo"]
 
     my_csco =  cursor.execute("SELECT csCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
