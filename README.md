@@ -9,12 +9,17 @@ from utils import api_library, dbLibrary
 from werkzeug.utils import secure_filename
 ```
 
-## Team Name: Discarded Reindeer ## 
+### Team Name: Discarded Reindeer ### 
 
-## Project Name: Computer Love ##
+### Project Name: Computer Love ###
 
-### Link to video: ### 
+### Link to video:  [Our video](https://help.github.com/articles/creating-and-highlighting-code-blocks/) ### 
 
-### Instructions for Use: ###
+## Instructions for Use: ##
+
+1. ``` python login.py ``` 
+
+2. access page on local host 5000 
+
 
 
