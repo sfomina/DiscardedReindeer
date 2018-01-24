@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for, flash, send_from_directory
 import os, sqlite3, hashlib
-from utils import api_library
+from utils import api_library, dbLibrary
 from werkzeug.utils import secure_filename
 
 SUCCESS = 1
@@ -104,11 +104,13 @@ def create_account():
     if result == SUCCESS:
         with db:
             c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
-        users[username] = password
 
-        #form personality profile
+            users[username] = password
+            #form personality profile
+            dbLibrary.update("users", "suggested" , "''", "username = '" + username + "'", c)
+            dbLibrary.update("users", "queue" , "''","username = '" + username + "'", c)
+            dbLibrary.insertRow("formula", ["username", "openCo" , "conscCo", "extraCo" , "agreeCo", "emotRangeCo", "challengeCo", "curiosityCo", "excitementCo", "harmonyCo", "idealCo", "libertyCo", "loveCo", "practicalityCo", "expressionCo", "stabilityCo", "structureCo", "csCo"],[ username , 1 ,1 ,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.1] ,c)
         api_library.create_profile(username, bio)
-
         flash(username + " registered.")
 
     elif result == BAD_USER:
@@ -146,6 +148,8 @@ def welcome():
     if 'user' not in session:
         return redirect( url_for('root') )
     else:
+        username = session['user']
+        print "\n\nYOUR MATCH: " + str(api_library.find_match(username)) + "\n\n"
         return render_template('welcome.html', user=session['user'], title='Welcome')
 
 @form_site.route('/logout', methods=['POST', "get"])
