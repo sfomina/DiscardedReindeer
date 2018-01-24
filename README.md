@@ -13,7 +13,7 @@ from werkzeug.utils import secure_filename
 
 ### Project Name: Computer Love ###
 
-### Link to video:  [Our video](https://help.github.com/articles/creating-and-highlighting-code-blocks/) ### 
+### Link to video:  [Our video](https://youtu.be/eCuAOikE2Sc) ### 
 
 ## Instructions for Use: ##
 
