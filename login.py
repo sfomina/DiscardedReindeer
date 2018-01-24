@@ -171,7 +171,7 @@ def welcome():
             print "YOUR MATCH: " + name
             print "\n\n"
 
-            return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = image)
+            return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = "static/" + image)
         else:
             return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
 
