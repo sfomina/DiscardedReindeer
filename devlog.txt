@@ -27,3 +27,6 @@ implemented file uploading
 
 davidD -- 2018-01-23 23:55:00
 implemented face++ api stuff and finalized file uploading
+angelicaZ -- 2018-01-24 03:46:47
+javascript for word count working
+

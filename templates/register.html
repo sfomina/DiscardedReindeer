@@ -2,6 +2,9 @@
 
 
 {% block body %}
+
+
+
   <body class = "root">
      <div class = "floatbody">
 
@@ -42,7 +45,7 @@
            			 	{% endfor %}
         			</select>
      		   </div>
-           
+
 
 	   <div class="form-group">
         <b>  <label for="gender">Your Gender</label> </b>
@@ -73,6 +76,7 @@
         <div class="form-group">
         <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
           <select class="form-control" name="lang" id="lang" required>
+
             <option>Java</option>
             <option>Python</option>
             <option>C</option>
@@ -130,7 +134,7 @@
 
         <div class="form-group">
         <b>  <label for="inputBio">Write a personal biography (100 words minimum)</label> </b>
-          <textarea class="form-control" name="bio" id="inputBio" rows="3" minlength="100" required></textarea>
+          <textarea class="form-control" name="bio" id="inputBio" rows="3"  required></textarea>
         </div>
 
 
@@ -151,7 +155,7 @@
 
           <br>
 
-          <input type="submit" value="Register" name="submit" class = "register right button">
+          <input type="submit" value="Register" name="submit"  id="submit-button" onclick="return checkWordCount()"  class = "register right button">
 	  </form>
   </div>
 </div>

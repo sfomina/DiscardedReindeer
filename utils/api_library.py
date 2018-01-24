@@ -21,6 +21,7 @@ def create_profile(username, bio):
     #now a dictionary
     personality_results = personality_results.json()
 
+    print personality_results
     #index big 5 emotions
     openn = personality_results["personality"][0]["percentile"]
     consc = personality_results["personality"][1]["percentile"]
@@ -41,14 +42,14 @@ def create_profile(username, bio):
     expression = personality_results["needs"][9]["percentile"]
     stability = personality_results["needs"][10]["percentile"]
     structure = personality_results["needs"][11]["percentile"]
-    
+
     #open database
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
 
     #insert into personality table name and your scores
     dbLibrary.insertRow("personality" , ["username" , "open" , "consc" , "extra", "agree" , "emotRange", "challenge" ,"closeness", "curiosity", "excitement", "harmony", "ideal", "liberty", "love", "practicality" , "expression", "stability", "structure"] , [username, openn , consc , extra , agree, emot_range, challenge, closeness, curiosity, excitement, harmony, ideal, liberty, love, practicality, expression, stability, structure], cursor)
-    
+
     #close database
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
@@ -85,16 +86,16 @@ def cs_score (username, pos_match, cursor):
 
     percent = total/6
     return percent
-     
-    
-    
+
+
+
 #==================================================================================================================
 
 #=================================FIND MATCH ========================================================================
-    
+
 
 #returns name of potential match or "none" if no potential matches
-#stores in users table:  name of current suggested match, percent similarity,and differences for each trait for later use in learning 
+#stores in users table:  name of current suggested match, percent similarity,and differences for each trait for later use in learning
 def find_match(username):
     db = dbLibrary.openDb("dating.db")
     cursor = dbLibrary.createCursor(db)
@@ -108,14 +109,14 @@ def find_match(username):
     if len(queue) > 1:
         match = queue[1][0]
         dbLibrary.update ("users" , "posMatch" , "'" + match + "'", "username = '" + username + "'", cursor)
-        
+
         dbLibrary.update("users" , "csPercent", queue[1][2] , "username = '" + username + "'" , cursor)
 
         dbLibrary.update("users", "percent" ,queue[1][1], "username = '" + username + "'", cursor)
 
         differences = ["od" , "cd" , "ed" , "ad" , "emd" , "challd" , "curd" , "exd" , "hd" , "ideald" , "libd" , "lod" , "pd", "exprd" , "stabd", "strucd"]
         var_diff = [float(queue[1][3]) ,float(queue[1][4]) ,float(queue[1][5]) ,float(queue[1][6]) ,float(queue[1][7]) ,float(queue[1][8]) , float(queue[1][9]),float(queue[1][10]) ,float(queue[1][11]) ,float(queue[1][12]) , float(queue[1][13]) ,float(queue[1][14]) , float(queue[1][15]) ,float(queue[1][16]) ,float(queue[1][17]) ,float(queue[1][18])]
-        
+
         for p in range(16):
             dbLibrary.update("users", differences[p] , var_diff[p], "username = '" + username + "'", cursor)
 
@@ -127,17 +128,17 @@ def find_match(username):
         dbLibrary.commit(db)
         dbLibrary.closeFile(db)
         return match
-    
-    
+
+
     prefGender = cursor.execute("SELECT prefGender FROM users WHERE username = '" + username + "';").fetchall()[0][0]
-    
+
     gender = cursor.execute("SELECT gender FROM users WHERE username =  '" + username + "';").fetchall()[0][0]
-    
+
     my_age = cursor.execute("SELECT age FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     upper_bound = my_age + 15
     lower_bound = my_age - 15
-    
-    #selecting each of my subscores 
+
+    #selecting each of my subscores
     my_open = cursor.execute("SELECT open FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
     my_consc = cursor.execute("SELECT consc FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
     my_extra = cursor.execute("SELECT extra FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
@@ -178,8 +179,8 @@ def find_match(username):
 
     my_suggested_users = cursor.execute("SELECT suggested FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     my_suggested_list = my_suggested_users.split(",")
-    
-    
+
+
     #filter out by gender and age and not me
     pos_matches_cursor = cursor.execute("SELECT username FROM users WHERE prefGender = '" + gender + "' and gender = '" + prefGender + "' and username != '" + username + "' and (age <= " + str(upper_bound) + " or age >= " + str(lower_bound)  + ");").fetchall()
 
@@ -188,11 +189,11 @@ def find_match(username):
         for match in item:
             pos_matches.append(str(match))
 
- 
-    
+
+
     for user in pos_matches:
-        if user not in my_suggested_list: 
-            openn =  cursor.execute("SELECT open FROM personality WHERE username = '" + user + "';").fetchall()[0][0]            
+        if user not in my_suggested_list:
+            openn =  cursor.execute("SELECT open FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             consc = cursor.execute("SELECT consc FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             extra = cursor.execute("SELECT extra FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             agree = cursor.execute("SELECT agree FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
@@ -226,10 +227,10 @@ def find_match(username):
             exprco =  cursor.execute("SELECT expressionCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
             stabco =  cursor.execute("SELECT stabilityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
             strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
-            denominator = oco + cco + eco + aco + emotco + challco + curco + exco + hco + idealco + libco + loco+ pco+ exprco + stabco + strucco 
+            denominator = oco + cco + eco + aco + emotco + challco + curco + exco + hco + idealco + libco + loco+ pco+ exprco + stabco + strucco
 
             csco =  cursor.execute("SELECT csCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
-        
+
             #differences
             od = abs(openn - my_open)
             cd = abs(consc - my_consc)
@@ -247,42 +248,42 @@ def find_match(username):
             exprd = abs(expression - my_expression)
             stabd = abs(stability - my_stability)
             strucd = abs(structure - my_structure)
-        
+
             total = oco*od + cco*cd + eco*ed + aco*ad + emotco*emd + challco*challd + curco*curd + exco*exd + hco*hd + idealco*ideald + libco*libd + loco*lod + pco*pd + exprco*exprd + stabco*stabd + strucco*strucd
             my_total = my_oco*od + my_cco*cd + my_eco*ed + my_aco*ad + my_emotco*emd + my_challco*challd + my_curco*curd + my_exco*exd + my_hco*hd + my_idealco*ideald + my_libco*libd + my_loco*lod + my_pco*pd + my_exprco*exprd + my_stabco*stabd + my_strucco*strucd
 
             #IF YOU SWIPED LEFT ON A PERSON
-            #lowest difference must be weighted less 
-            #highest difference must be weighted more 
-        
+            #lowest difference must be weighted less
+            #highest difference must be weighted more
+
             percent_similarity = 1- (total/denominator)
             my_percent_similarity = 1 - (my_total/my_denominator)
 
-        
+
             cs_percent = cs_score(username , user , cursor)
-            
+
             percent_similarity = (percent_similarity + csco * cs_percent)/ (1 + csco)
             my_percent_similarity = (my_percent_similarity + my_csco *cs_percent)/ (1 + my_csco)
-        
+
             overall_percent_similarity = 100* ((percent_similarity * my_percent_similarity)**(0.5))
-        
+
             #field posMatch
             if overall_percent_similarity >= 60:
                 dbLibrary.update ("users" , "posMatch" , "'" + user + "'", "username = '" + username + "'", cursor)
                 dbLibrary.update("users" , "csPercent", str(cs_percent) , "username = '" + username + "'" , cursor)
                 my_suggested_list.append(user)
                 my_suggested_users = ",".join(my_suggested_list)
-                
+
                 #updating your match's suggested list
                 suggested_users = cursor.execute("SELECT suggested FROM users WHERE username = '" + user + "';").fetchall()[0][0]
                 suggested_list = suggested_users.split(",")
                 suggested_list.append(username)
                 suggested_users = ",".join(suggested_list)
                 dbLibrary.update("users" , "suggested", "'" + suggested_users + "'","username = '" + user + "'", cursor )
-                
-        
+
+
                 dbLibrary.update("users" , "suggested", "'" + my_suggested_users + "'","username = '" + username + "'", cursor )
-                
+
                 dbLibrary.update("users", "percent" , str(int(overall_percent_similarity)), "username = '" + username + "'", cursor)
 
                 differences = ["od" , "cd" , "ed" , "ad" , "emd" , "challd" , "curd" , "exd" , "hd" , "ideald" , "libd" , "lod" , "pd", "exprd" , "stabd", "strucd"]
@@ -300,14 +301,14 @@ def find_match(username):
                     queue[n] = ",".join(queue[n])
                 queue = "-".join(queue)
                 dbLibrary.update("users", "queue" , "'" + queue + "'" ,"username = '" + user + "'", cursor)
-                    
+
 
                 dbLibrary.commit(db)
                 dbLibrary.closeFile(db)
                 return user
-            
 
-    dbLibrary.update ("users" , "posMatch" , "'none'", "username = '" + username + "'", cursor)       
+
+    dbLibrary.update ("users" , "posMatch" , "'none'", "username = '" + username + "'", cursor)
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
     return "none"
@@ -318,7 +319,7 @@ def find_match(username):
 #updates formula table coefficients
 '''
 def adjust_formula(username):
-    #selecting each of my subscores 
+    #selecting each of my subscores
     my_od = cursor.execute("SELECT od FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
     my_cd = cursor.execute("SELECT cd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
     my_ed = cursor.execute("SELECT ed FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
@@ -359,8 +360,8 @@ def adjust_formula(username):
 
     my_suggested_users = cursor.execute("SELECT suggested FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     my_suggested_list = my_suggested_users.split(",")
-    
-    
+
+
     #filter out by gender and age and not me
     pos_matches_cursor = cursor.execute("SELECT username FROM users WHERE prefGender = '" + gender + "' and gender = '" + prefGender + "' and username != '" + username + "' and (age <= " + str(upper_bound) + " or age >= " + str(lower_bound)  + ");").fetchall()
 
@@ -369,11 +370,11 @@ def adjust_formula(username):
         for match in item:
             pos_matches.append(str(match))
 
- 
-    
+
+
     for user in pos_matches:
-        if user not in my_suggested_list: 
-            openn =  cursor.execute("SELECT open FROM personality WHERE username = '" + user + "';").fetchall()[0][0]            
+        if user not in my_suggested_list:
+            openn =  cursor.execute("SELECT open FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             consc = cursor.execute("SELECT consc FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             extra = cursor.execute("SELECT extra FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
             agree = cursor.execute("SELECT agree FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
@@ -406,8 +407,7 @@ def adjust_formula(username):
             pco =  cursor.execute("SELECT practicalityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
             exprco =  cursor.execute("SELECT expressionCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
             stabco =  cursor.execute("SELECT stabilityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
-            strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]    
+            strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
 
 
 '''
-
