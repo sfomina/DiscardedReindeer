@@ -1,5 +1,10 @@
 #devlog
 ------------------------------------------------------------------
+fominaS
+created a design document using ideas from class
+includes the way matches are calculated through percent similarity 
+and how we learn from right/left clicks
+
 chenK — 2018-01-03 14:05
 began creating html templates and forms
 
@@ -8,6 +13,9 @@ finished login system
 
 karenC -- 2018-01-09 23:32:02
 stylization
+
+fominaS 
+changed the learning algorithm to include queues and suggested lists and cs percentages(note: did not immediately push this change to design doc)
 
 angelicaZ -- 2018-01-10 05:35:20
 updated register form with quiz
@@ -18,20 +26,48 @@ database not fully working  yet
 angelicaZ -- 2018-01-10 15:15:17
 data gets put in database correctly
 
+fominaS -- 2018-01-12 14:06:03
+creating the personality profile with the ibm api and fixed file bug
+
 karenC -- 2018-01-10 23:06:26
 lots of form making with html and css
+
+fominaS -- 2018-01-23 13:22:28
+worked on find match filter and calculations
 
 davidD -- 2018-01-23 17:20:00
 implemented file uploading
 
+fominaS -- 2018-01-23 19:25:00
+find match completed and works with queue
+
 davidD -- 2018-01-23 23:55:00
-implemented face++ api stuff and finalized file uploading
+implemented face++ api stuff and finalized file uploading 
+
+fominaS -- 2018-01-24 02:15:55
+the adjust formula function for left click learning works
 
 angelicaZ -- 2018-01-24 03:46:47
 javascript for word count working
+
+fominaS -- 2018-01-24 04:02:23
+finished secured matches for when two people right click(like) each other
 
 angelicaZ -- 2018-01-24 04:08:32
 changed image names
 
 angelicaZ -- 2018-01-24 07:33:31
 fixed matches page
+
+fominaS -- 2018-01-24 05:12:04
+the image shows up on your "swiping"/ suggested matches dashboard
+
+fominaS -- 2018-01-24 07:05:00
+made left(dislike) and right(like) click routes
+
+fominaS -- 2018-01-24 08:00:27
+add phone numbers, names, and images to secured matches page
+
+karenC -- 2018-01-24 09:19:57
+matches complete
+

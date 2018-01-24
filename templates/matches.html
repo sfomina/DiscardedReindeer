@@ -13,10 +13,35 @@
 		</div>
 </div>
     {% if matches|length == 0 %}
-    <h2> There are no matches to display, yet. Keep swiping!  </h2>
+	<br>
+    <h2 class="centered"> There are no matches to display, yet. Keep swiping!  </h2>
     {% endif %}
-
+	<br>
 		<div class="container">
+			<div class="row">
+					<div class="col-md-6 mx-auto">
+						<div class = "centered">
+						
+					<table id="matches" border="1" width="100%">
+						<TR>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Phone Number</th>
+						</TR>
+						
+						{% for match in matches %}
+						{% for image in images %}
+						{% for number in numbers %}
+							<TR>
+								<TD><img src={{image}} height="100px" width="100px"></TD>
+								<TD>{{match}}</TD>
+								<TD>{{number}}</TD>
+							</TR>
+						{% endfor %}
+						{% endfor %}
+						{% endfor %}
+					</table>
+			<!--
 		{% for match in matches %}
 			<div class="row">
 				<div class="col-md-4 mx-auto">
@@ -24,12 +49,23 @@
 				</div>
 			</div>
 		{% endfor %}
-</div>
+				-->
+				</div>
+			</div>
+		</div>
+		</div>
 
 
-    <form action="/">
-    <br><input type="submit" value="Go Back!" class = "register right button">
- </form>
+		<div class="row">
+				<div class="col-md-6 mx-auto">
+					<div class = "centered">
+      	 				<form action="/">
+        					<br><input type="submit" value="Go Back!" class = "register right button">
+     	 				</form>
+					</div>
+		
+				</div>
+			</div>
   	</div>
 </body>
 {% endblock %}
