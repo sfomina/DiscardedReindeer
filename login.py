@@ -109,6 +109,7 @@ def create_account():
 
             users[username] = password
             #form personality profile
+            dbLibrary.update("users", "img_name" , filename, "username = '" + username + "'", c)
             dbLibrary.update("users", "suggested" , "''", "username = '" + username + "'", c)
             dbLibrary.update("users", "queue" , "''","username = '" + username + "'", c)
             dbLibrary.update("users", "liked" , "''", "username = '" + username + "'", c)
@@ -163,7 +164,9 @@ def welcome():
         if posMatch != "none":
             name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
-            image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + ".jpg';").fetchall()[0][0]
+            image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + ".jpg';").fetchall()
+            print image
+            
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
