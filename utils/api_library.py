@@ -311,7 +311,7 @@ def find_match(username):
     dbLibrary.update ("users" , "posMatch" , "'none'", "username = '" + username + "'", cursor)
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
-    return  None
+    return "none"
 
 #===================================================================================================
 
