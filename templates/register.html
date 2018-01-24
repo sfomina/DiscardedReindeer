@@ -33,7 +33,124 @@
 
         <b> First, choose a username and password! </b><br>
 
+<<<<<<< HEAD
           Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
+=======
+
+	   <div class="form-group">
+        <b>  <label for="gender">Your Gender</label> </b>
+          <select class="form-control" name="gender" id="gender">
+            <option disabled selected value> -- select an option -- </option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b>  <label for="prefGender">Preferred Partner Gender</label> </b>
+          <select class="form-control" name="prefGender" id="prefGender">
+            <option disabled selected value> -- select an option -- </option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+		<div class="form-group">
+      			<b>  <label for="inputphone">What's your phone number?(This will be given to matches)</label> </b>
+       			<textarea class="form-control" name="inputphone" id="inputphone" rows="1" required></textarea>
+     	</div>
+<!--
+        <div class="form-group">
+        <b> <label for="sexualOrientation">Sexual Orientation</label> </b>
+          <select class="form-control" name= "sexOren" id="sexOren" required>
+            <option>Heterosexual</option>
+            <option>Homosexual</option>
+            <option>Bisexual</option>
+          </select>
+        </div>
+-->
+        <div class="form-group">
+        <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
+          <select class="form-control" name="lang" id="lang" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Java</option>
+            <option>Python</option>
+            <option>C</option>
+            <option>Javascript</option>
+            <option> Ruby </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="sort">Favorite Sorting Algorithm</label> </b>
+          <select class="form-control" name= "sort" id="sort" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Merge sort</option>
+            <option>Heapsort</option>
+            <option>Quicksort</option>
+            <option>Counting sort</option>
+            <option>Bubble sort </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="type"> Which type of  programming do you prefer? </label> </b>
+          <select class="form-control" name="type" id="type" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Functional Programming (FP)</option>
+            <option>Object-Oriented Programming (OOP) </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="bitcoin"> If asked to, would you be able to explain bitcoin? </label> </b>
+          <select class="form-control" name= "bitcoin" id="bitcoin" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not really, but I can make it sound like I know what I'm talking about</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="case"> How do you name things? </label> </b>
+          <select class="form-control" name= "case" id="case" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>camelCase</option>
+            <option>snake_case</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="braces"> Which of these two  types of people are you? </label> </b>
+          <select class="form-control" name ="braces" id="braces" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>First</option>
+            <option>Second</option>
+          </select>
+        </div>
+        <img src="/static/formpic.jpg" width="70%">
+        <br>
+        <br>
+
+        <div class="form-group">
+        <b>  <label for="inputBio">Write a personal biography (100 words minimum)</label> </b>
+          <textarea class="form-control" name="bio" id="inputBio" rows="3"  required></textarea>
+        </div>
+
+
+        <div class="form-group">
+        <b><label for="inputPhoto" class="centered">Upload a photo of yourself!</label> </b><br>
+           <div class="centered">
+             <input type="file" class="form-control-file" name="file" id="inputPhoto" accept="image/jpeg, image/png, image/jpg" required/>
+         </div>
+        </div>
+        <br>
+
+        <b> Finally, choose a username and password! </b><br>
+
+          Username: <input type="text" formmethod="post" id= "user" onchange="return checkUsername()" name="user" class ="accountField" required>
+>>>>>>> 16be98e1e79d6e9c7881afc531c1b12f3d7d056d
           <br><br>
           Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
           <br>

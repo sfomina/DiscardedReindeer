@@ -11,7 +11,7 @@ db = sqlite3.connect(f, check_same_thread=False) #open if f exists, otherwise cr
 db.create_function('encrypt', 1, encrypt_password)
 c = db.cursor()   #facilitate db ops
 
-create_users = "CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT NOT NULL, name TEXT NOT NULL, age INTEGER NOT NULL,gender TEXT NOT NULL, prefGender TEXT NOT NULL, lang TEXT NOT NULL, sortAlg TEXT NOT NULL, type TEXT NOT NULL, bitcoin TEXT NOT NULL, nameCase TEXT NOT NULL, braces TEXT NOT NULL, bio TEXT NOT NULL, img_name TEXT NOT NULL, posMatch TEXT, percent INTEGER, od DECIMAL, cd DECIMAL, ed DECIMAL, ad DECIMAL, emd DECIMAL, challd DECIMAL, curd DECIMAL, exd DECIMAL, hd DECIMAL, ideald DECIMAL, libd DECIMAL, lod DECIMAL, pd DECIMAL, exprd DECIMAL, stabd DECIMAL, strucd DECIMAL, csPercent DECIMAL, suggested TEXT, queue TEXT, liked TEXT, secured TEXT);"
+create_users = "CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT NOT NULL,phone TEXT, name TEXT NOT NULL, age INTEGER NOT NULL,gender TEXT NOT NULL, prefGender TEXT NOT NULL, lang TEXT NOT NULL, sortAlg TEXT NOT NULL, type TEXT NOT NULL, bitcoin TEXT NOT NULL, nameCase TEXT NOT NULL, braces TEXT NOT NULL, bio TEXT NOT NULL, img_name TEXT NOT NULL, posMatch TEXT, percent INTEGER, od DECIMAL, cd DECIMAL, ed DECIMAL, ad DECIMAL, emd DECIMAL, challd DECIMAL, curd DECIMAL, exd DECIMAL, hd DECIMAL, ideald DECIMAL, libd DECIMAL, lod DECIMAL, pd DECIMAL, exprd DECIMAL, stabd DECIMAL, strucd DECIMAL, csPercent DECIMAL, suggested TEXT, queue TEXT, liked TEXT, secured TEXT);"
 
 
 
@@ -23,9 +23,9 @@ create_formula = "CREATE TABLE formula (username TEXT PRIMARY KEY,openCo DECIMAL
 
 
 #create_users = "CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT NOT NULL);"
-insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', '18', 'Male', 'Male', 'Java', 'Merge Sort', 'OOP', 'No', 'snake_case', 'First', 'blah blah bio');"
+#insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', '18', 'Male', 'Male', 'Java', 'Merge Sort', 'OOP', 'No', 'snake_case', 'First', 'blah blah bio');"
 
-#create formula table
+
 
 #insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'));"
 

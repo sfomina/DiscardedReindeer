@@ -93,6 +93,7 @@ def create_account():
     username = request.form['user']
     password = request.form['pw']
     name = request.form['inputName']
+    phone = request.form['inputphone']
     age = request.form['age']
     prefGender = request.form['prefGender']
     gender = request.form['gender']
@@ -116,7 +117,7 @@ def create_account():
             img_name = filename
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
+            c.execute("INSERT INTO users (username, password, name,phone, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?)", (username, password, name,phone, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
 
             users[username] = password
             #form personality profile
@@ -194,10 +195,19 @@ def matches():
     #print "matches: " + matches
     matches = matches.split(',')
     matches = filter (None, matches)
+    names = []
+    images = []
+    numbers = []
+    for match in matches:
+        names.append( c.execute("SELECT name FROM users WHERE username = '" + match + "';").fetchall()[0][0])
+        images.append("static/" + (c.execute("SELECT img_name FROM users WHERE username = '" + match + "';").fetchall()[0][0]))
+        numbers.append(c.execute("SELECT phone FROM users WHERE username = '" + match + "';").fetchall()[0][0])
+
+    indexes = range(len(matches))
     #print len(matches)
     if (len(matches) == 0):
         flash("There are no matches to display, yet. Keep swiping!")
-    return render_template('matches.html', matches = matches)
+    return render_template('matches.html', matches = names, images = images, numbers = numbers, indexes = indexes)
 
 
 @form_site.route('/logout', methods=['POST', "get"])
