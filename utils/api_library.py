@@ -376,3 +376,40 @@ def adjust_formula(username):
 
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
+
+#==========================================================================================
+
+#=============================LIKING A SUGGESTED MATCH====================================================
+
+#adds someone in your liked field, and checks to see if should add anything to secured field
+def like(username, liked_match):
+    liked_str = cursor.execute("SELECT liked FROM users WHERE username = '" + username + "';").fetchall()[0][0]
+    liked_list = liked_str.split(",")
+
+    secured_str = cursor.execute("SELECT secured FROM users WHERE username = '" + username + "';").fetchall()[0][0]
+    secured_list = secured_str.split(",")
+    
+    their_secured_str = cursor.execute("SELECT secured FROM users WHERE username = '" + liked_match + "';").fetchall()[0][0]
+    their_secured_list = their_secured_str.split(",")
+    
+    liked_list.append(liked_match)
+
+    their_liked_str = cursor.execute("SELECT liked FROM users WHERE username = '" + liked_match + "';").fetchall()[0][0]
+    their_liked_list = their_liked_str.split(",")
+    if username in their_like_list:
+        secured_list.append(liked_match)
+        their_secured_list.append(username)
+        secured_str = ",".join(secured_list)
+        their_secured_str = ",".join(their_secured_list)
+        dbLibrary.update("users" , "secured", "'" + secured_str + "'","username = '" + username + "'", cursor )
+        dbLibrary.update("users" , "secured", "'" + their_secured_str + "'","username = '" + liked_match + "'", cursor )
+        
+
+    liked_str = ",".join(liked_list)
+    dbLibrary.update("users" , "liked", "'" + liked_str + "'","username = '" + username + "'", cursor )
+
+    dbLibrary.commit(db)
+    dbLibrary.closeFile(db)
+    
+        
+

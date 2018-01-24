@@ -109,6 +109,8 @@ def create_account():
             #form personality profile
             dbLibrary.update("users", "suggested" , "''", "username = '" + username + "'", c)
             dbLibrary.update("users", "queue" , "''","username = '" + username + "'", c)
+            dbLibrary.update("users", "liked" , "''", "username = '" + username + "'", c)
+            dbLibrary.update("users", "secured" , "''", "username = '" + username + "'", c)
             dbLibrary.insertRow("formula", ["username", "openCo" , "conscCo", "extraCo" , "agreeCo", "emotRangeCo", "challengeCo", "curiosityCo", "excitementCo", "harmonyCo", "idealCo", "libertyCo", "loveCo", "practicalityCo", "expressionCo", "stabilityCo", "structureCo", "csCo"],[ username , 1 ,1 ,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.1] ,c)
         api_library.create_profile(username, bio)
         flash(username + " registered.")
