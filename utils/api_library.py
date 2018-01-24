@@ -315,8 +315,8 @@ def find_match(username):
 #===================================================================================================
 
 #===============================ADJUST FORMULA======================================================
-
-#updates formula table coefficients 
+#updates formula table coefficients
+'''
 def adjust_formula(username):
     #selecting each of my subscores 
     my_od = cursor.execute("SELECT od FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
@@ -409,5 +409,5 @@ def adjust_formula(username):
             strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]    
 
 
-
+'''
 
