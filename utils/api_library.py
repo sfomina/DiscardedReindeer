@@ -383,6 +383,8 @@ def adjust_formula(username):
 
 #adds someone in your liked field, and checks to see if should add anything to secured field
 def like(username, liked_match):
+    db = dbLibrary.openDb("dating.db")
+    cursor = dbLibrary.createCursor(db)
     liked_str = cursor.execute("SELECT liked FROM users WHERE username = '" + username + "';").fetchall()[0][0]
     liked_list = liked_str.split(",")
 
@@ -396,7 +398,7 @@ def like(username, liked_match):
 
     their_liked_str = cursor.execute("SELECT liked FROM users WHERE username = '" + liked_match + "';").fetchall()[0][0]
     their_liked_list = their_liked_str.split(",")
-    if username in their_like_list:
+    if username in their_liked_list:
         secured_list.append(liked_match)
         their_secured_list.append(username)
         secured_str = ",".join(secured_list)
