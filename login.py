@@ -117,7 +117,7 @@ def create_account():
             img_name = filename
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users (username, password, name,phone, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?)", (username, password, name,phone, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
+            c.execute("INSERT INTO users (username, password, name, phone, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?,?)", (username, password, name,phone, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
 
             users[username] = password
             #form personality profile
