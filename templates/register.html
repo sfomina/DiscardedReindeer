@@ -40,6 +40,7 @@
       				  <div class="form-group">
      					 <b> <label for="age">Age</label> </b>
        				  <select class="form-control" name="age" id="age" required>
+                  <option disabled selected value> -- select an option -- </option>
          				 {% for x in range(16, 100) %}
          				<option> {{x}} </option>
            			 	{% endfor %}
@@ -50,6 +51,7 @@
 	   <div class="form-group">
         <b>  <label for="gender">Your Gender</label> </b>
           <select class="form-control" name="gender" id="gender">
+            <option disabled selected value> -- select an option -- </option>
             <option>Male</option>
             <option>Female</option>
           </select>
@@ -58,6 +60,7 @@
         <div class="form-group">
         <b>  <label for="prefGender">Preferred Partner Gender</label> </b>
           <select class="form-control" name="prefGender" id="prefGender">
+            <option disabled selected value> -- select an option -- </option>
             <option>Male</option>
             <option>Female</option>
           </select>
@@ -80,7 +83,7 @@
         <div class="form-group">
         <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
           <select class="form-control" name="lang" id="lang" required>
-
+            <option disabled selected value> -- select an option -- </option>
             <option>Java</option>
             <option>Python</option>
             <option>C</option>
@@ -92,6 +95,7 @@
         <div class="form-group">
         <b> <label for="sort">Favorite Sorting Algorithm</label> </b>
           <select class="form-control" name= "sort" id="sort" required>
+            <option disabled selected value> -- select an option -- </option>
             <option>Merge sort</option>
             <option>Heapsort</option>
             <option>Quicksort</option>
@@ -103,6 +107,7 @@
         <div class="form-group">
         <b> <label for="type"> Which type of  programming do you prefer? </label> </b>
           <select class="form-control" name="type" id="type" required>
+            <option disabled selected value> -- select an option -- </option>
             <option>Functional Programming (FP)</option>
             <option>Object-Oriented Programming (OOP) </option>
           </select>
@@ -111,6 +116,7 @@
         <div class="form-group">
         <b> <label for="bitcoin"> If asked to, would you be able to explain bitcoin? </label> </b>
           <select class="form-control" name= "bitcoin" id="bitcoin" required>
+            <option disabled selected value> -- select an option -- </option>
             <option>Yes</option>
             <option>No</option>
             <option>Not really, but I can make it sound like I know what I'm talking about</option>
@@ -120,6 +126,7 @@
         <div class="form-group">
         <b> <label for="case"> How do you name things? </label> </b>
           <select class="form-control" name= "case" id="case" required>
+            <option disabled selected value> -- select an option -- </option>
             <option>camelCase</option>
             <option>snake_case</option>
           </select>
@@ -128,6 +135,7 @@
         <div class="form-group">
         <b> <label for="braces"> Which of these two  types of people are you? </label> </b>
           <select class="form-control" name ="braces" id="braces" required>
+            <option disabled selected value> -- select an option -- </option>
             <option>First</option>
             <option>Second</option>
           </select>
@@ -152,7 +160,7 @@
 
         <b> Finally, choose a username and password! </b><br>
 
-          Username: <input type="text" formmethod="post" name="user" class ="accountField" required>
+          Username: <input type="text" formmethod="post" id= "user" onchange="return checkUsername()" name="user" class ="accountField" required>
           <br><br>
           Password: <input type="password" formmethod="post" name="pw" class = "accountField" required>
           <br>
