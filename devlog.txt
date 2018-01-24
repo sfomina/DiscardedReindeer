@@ -32,3 +32,6 @@ javascript for word count working
 
 angelicaZ -- 2018-01-24 04:08:32
 changed image names
+angelicaZ -- 2018-01-24 07:33:31
+fixed matches page
+

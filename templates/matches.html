@@ -3,7 +3,7 @@
 {% block body %}
 
 <body style = "background-color: gainsboro">
-   
+
       <div class = "header3">
         <div id = "title">
 		  	PROJECT NAME
@@ -11,7 +11,11 @@
         <div id= "subtitle">
   		  	You had me at hello world...
 		</div>
-		
+
+    {% if matches|length == 0 %}
+    <h2> There are no matches to display, yet. Keep swiping!  </h2>
+    {% endif %}
+    
 		<div class="container">
 		{% for match in matches %}
 			<div class="row">
@@ -20,6 +24,12 @@
 				</div>
 			</div>
 		{% endfor %}
-		</div>
+</div>
+
+
+    <form action="/">
+    <br><input type="submit" value="Go Back!" class = "register right button">
+ </form>
   	</div>
 </body>
+{% endblock %}
