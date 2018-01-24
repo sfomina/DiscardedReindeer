@@ -1,4 +1,4 @@
-﻿#devlog
+#devlog
 ------------------------------------------------------------------
 fominaS
 created a design document using ideas from class
@@ -67,4 +67,7 @@ made left(dislike) and right(like) click routes
 
 fominaS -- 2018-01-24 08:00:27
 add phone numbers, names, and images to secured matches page
+
+karenC -- 2018-01-24 09:19:57
+matches complete
 

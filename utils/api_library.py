@@ -3,10 +3,10 @@ import random
 from requests.auth import HTTPBasicAuth
 import dbLibrary
 
+import key
 
-
-ibm_user = "867c9b88-87d2-4ebc-a055-70071421c0ba"
-ibm_pass = "lb340eEJSNnM"
+ibm_user = key.ibm_user
+ibm_pass = key.ibm_pass
 
 
 #============================CREATE PROFILE ====================================================
