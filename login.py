@@ -112,6 +112,7 @@ def create_account():
 
     elif result == BAD_USER:
         flash("That username is already in use. Try another one")
+        return redirect(url_for('create_account'))
     return redirect(url_for('root'))
 
 @form_site.route('/auth', methods=['POST', 'GET'])
@@ -145,6 +146,12 @@ def logout():
         flash(session['user'] + " logged out.")
         session.pop('user')
     return redirect( url_for('root') )
+
+@form_site.route('/', defaults={'path': ''})
+@form_site.route('/<path:path>')
+def catch_all(path):
+    flash ("Sorry! The page you tried to visit does not exist!")
+    return redirect(url_for('root'))
 
 
 if __name__ == '__main__':
