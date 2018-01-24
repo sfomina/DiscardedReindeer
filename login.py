@@ -157,7 +157,7 @@ def welcome():
         username = session['user']
         db = dbLibrary.openDb("dating.db")
         cursor = dbLibrary.createCursor(db)
-        posMatch = cursor.execute("SELECT posMatch FROM users WHERE username = '" + username + "';").fetchall()[0][0] 
+        posMatch = cursor.execute("SELECT posMatch FROM users WHERE username = '" + username + "';").fetchall()[0][0]
         if posMatch == "none":
             posMatch = api_library.find_match(username)
 
@@ -170,7 +170,7 @@ def welcome():
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
- 
+
             return render_template('welcome.html', user=session['user'], title='Welcome', name = name, bio = bio, image = image)
         else:
             return render_template('welcome.html', user=session['user'], title='Welcome', match = "none")
