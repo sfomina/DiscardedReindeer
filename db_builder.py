@@ -18,7 +18,7 @@ create_personality = "CREATE TABLE personality (username TEXT PRIMARY KEY, open 
 create_formula = "CREATE TABLE formula (username TEXT PRIMARY KEY, lang TEXT NOT NULL, sortAlg TEXT NOT NULL, type TEXT NOT NULL, bitcoin TEXT NOT NULL, nameCase TEXT NOT NULL, braces TEXT NOT NULL, bio TEXT NOT NULL, open DECIMAL NOT NULL, consc DECIMAL, extra DECIMAL, agree DECIMAL, emotRange DECIMAL);"
 
 #create_users = "CREATE TABLE users (username TEXT PRIMARY KEY, password TEXT NOT NULL);"
-insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', '18', 'Male', 'Bisexual', 'Java', 'Merge Sort', 'OOP', 'No', 'snake_case', 'First', 'blah blah bio');"
+insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'), 'test', '18', 'Male', 'Male', 'Java', 'Merge Sort', 'OOP', 'No', 'snake_case', 'First', 'blah blah bio');"
 
 
 #insert_admin = "INSERT INTO users VALUES ('test', encrypt('test'));"
