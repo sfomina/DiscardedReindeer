@@ -21,7 +21,7 @@ def create_profile(username, bio):
     #now a dictionary
     personality_results = personality_results.json()
 
-    print personality_results
+    #print personality_results
     #index big 5 emotions
     openn = personality_results["personality"][0]["percentile"]
     consc = personality_results["personality"][1]["percentile"]

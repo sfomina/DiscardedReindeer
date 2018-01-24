@@ -98,7 +98,7 @@ def create_account():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
+            filename = username; 
             file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
             img_name = filename
     if result == SUCCESS:
@@ -115,7 +115,7 @@ def create_account():
 
     elif result == BAD_USER:
         flash("That username is already in use. Try another one")
-    
+
     return redirect(url_for('root'))
 
 @form_site.route('/auth', methods=['POST', 'GET'])

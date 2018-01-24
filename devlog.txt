@@ -18,7 +18,6 @@ database not fully working  yet
 angelicaZ -- 2018-01-10 15:15:17
 data gets put in database correctly
 
-
 karenC -- 2018-01-10 23:06:26
 lots of form making with html and css
 
@@ -27,6 +26,9 @@ implemented file uploading
 
 davidD -- 2018-01-23 23:55:00
 implemented face++ api stuff and finalized file uploading
+
 angelicaZ -- 2018-01-24 03:46:47
 javascript for word count working
 
+angelicaZ -- 2018-01-24 04:08:32
+changed image names
