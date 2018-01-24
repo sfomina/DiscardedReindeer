@@ -311,14 +311,102 @@ def find_match(username):
     dbLibrary.commit(db)
     dbLibrary.closeFile(db)
     return "none"
-            
-        
-    
+
+#===================================================================================================
+
+#===============================ADJUST FORMULA======================================================
+
 #updates formula table coefficients 
-#def adjust_formula(username):
+def adjust_formula(username):
+    #selecting each of my subscores 
+    my_od = cursor.execute("SELECT od FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_cd = cursor.execute("SELECT cd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_ed = cursor.execute("SELECT ed FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_ad = cursor.execute("SELECT ad FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_emd = cursor.execute("SELECT emd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_challd = cursor.execute("SELECT challd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_curd = cursor.execute("SELECT curd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_exd = cursor.execute("SELECT exd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_hd = cursor.execute("SELECT hd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_ideald = cursor.execute("SELECT ideald FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_libd = cursor.execute("SELECT libd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_lod = cursor.execute("SELECT lod FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_pd = cursor.execute("SELECT pd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_exprd = cursor.execute("SELECT exprd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_stabd = cursor.execute("SELECT stabd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
+    my_strucd = cursor.execute("SELECT strucd FROM personality WHERE username = '" + username + "';").fetchall()[0][0]
 
+    #select MY coefficients from formula table
+    my_oco = cursor.execute("SELECT openCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_cco =  cursor.execute("SELECT conscCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_eco =  cursor.execute("SELECT extraCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_aco =  cursor.execute("SELECT agreeCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_emotco =  cursor.execute("SELECT emotRangeCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_challco =  cursor.execute("SELECT challengeCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_curco =  cursor.execute("SELECT curiosityCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_exco =  cursor.execute("SELECT excitementCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_hco =  cursor.execute("SELECT harmonyCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_idealco =  cursor.execute("SELECT idealCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_libco =  cursor.execute("SELECT libertyCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_loco =  cursor.execute("SELECT loveCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_pco =  cursor.execute("SELECT practicalityCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_exprco =  cursor.execute("SELECT expressionCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_stabco =  cursor.execute("SELECT stabilityCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+    my_denominator = my_oco + my_cco + my_eco + my_aco + my_emotco + my_challco + my_curco + my_exco + my_hco + my_idealco + my_libco + my_loco+ my_pco+ my_exprco + my_stabco + my_strucco
 
+    my_csco =  cursor.execute("SELECT csCo FROM formula WHERE username = '" + username + "';").fetchall()[0][0]
+
+    my_suggested_users = cursor.execute("SELECT suggested FROM users WHERE username = '" + username + "';").fetchall()[0][0]
+    my_suggested_list = my_suggested_users.split(",")
     
+    
+    #filter out by gender and age and not me
+    pos_matches_cursor = cursor.execute("SELECT username FROM users WHERE prefGender = '" + gender + "' and gender = '" + prefGender + "' and username != '" + username + "' and (age <= " + str(upper_bound) + " or age >= " + str(lower_bound)  + ");").fetchall()
+
+    pos_matches = []
+    for item in pos_matches_cursor:
+        for match in item:
+            pos_matches.append(str(match))
+
+ 
+    
+    for user in pos_matches:
+        if user not in my_suggested_list: 
+            openn =  cursor.execute("SELECT open FROM personality WHERE username = '" + user + "';").fetchall()[0][0]            
+            consc = cursor.execute("SELECT consc FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            extra = cursor.execute("SELECT extra FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            agree = cursor.execute("SELECT agree FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            emot_range = cursor.execute("SELECT emotRange FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            challenge = cursor.execute("SELECT challenge FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            curiosity = cursor.execute("SELECT curiosity FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            excitement = cursor.execute("SELECT excitement FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            harmony = cursor.execute("SELECT harmony FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            ideal = cursor.execute("SELECT ideal FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            liberty = cursor.execute("SELECT liberty FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            love = cursor.execute("SELECT love FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            practicality = cursor.execute("SELECT practicality FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            expression = cursor.execute("SELECT expression FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            stability = cursor.execute("SELECT stability FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+            structure = cursor.execute("SELECT structure FROM personality WHERE username = '" + user + "';").fetchall()[0][0]
+
+            #select coefficients from formula table
+            oco = cursor.execute("SELECT openCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            cco =  cursor.execute("SELECT conscCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            eco =  cursor.execute("SELECT extraCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            aco =  cursor.execute("SELECT agreeCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            emotco =  cursor.execute("SELECT emotRangeCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            challco =  cursor.execute("SELECT challengeCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            curco =  cursor.execute("SELECT curiosityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            exco =  cursor.execute("SELECT excitementCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            hco =  cursor.execute("SELECT harmonyCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            idealco =  cursor.execute("SELECT idealCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            libco =  cursor.execute("SELECT libertyCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            loco =  cursor.execute("SELECT loveCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            pco =  cursor.execute("SELECT practicalityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            exprco =  cursor.execute("SELECT expressionCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            stabco =  cursor.execute("SELECT stabilityCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]
+            strucco =  cursor.execute("SELECT structureCo FROM formula WHERE username = '" + user + "';").fetchall()[0][0]    
 
 
 
