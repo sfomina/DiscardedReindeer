@@ -166,7 +166,7 @@ def welcome():
             bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
             print image
-            
+
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
