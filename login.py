@@ -94,15 +94,16 @@ def create_account():
     bio = request.form['bio']
     result = check_newuser(username)
     users = user_dict()
+    img_name = ''
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(form_site.config['UPLOAD_FOLDER'], filename))
-            final_file = send_from_directory(form_site.config['UPLOAD_FOLDER'], filename)
+            img_name = filename
     if result == SUCCESS:
         with db:
-            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio ))
+            c.execute("INSERT INTO users (username, password, name, age, gender, prefGender, lang, sortAlg, type, bitcoin, nameCase, braces, bio, img_name) VALUES (?, encrypt(?), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)", (username, password, name, age,gender, prefGender, lang, sort, progType, bitcoin, case, braces , bio, img_name ))
         users[username] = password
 
         #form personality profile
@@ -130,6 +131,14 @@ def auth():
     elif result == BAD_USER:
         flash("Incorrect Username.")
     return redirect(url_for('root'))
+
+
+#FACE++API STUFF:
+#url = "https://api-us.faceplusplus.com/facepp/v3/compare?api_key=" + <api_key> + "&api_secret=" + <api_secret> + "&image_file1=" + send_from_directory(form_site.config['UPLOAD_FOLDER'], <IMG_NAME OF TARGET USER>) + "&img_file2=" + send_from_directory(form_site.config['UPLOAD_FOLDER'], <IMG_NAME OF TARGET USER>)
+#u = urllib2.urlopen(url)
+#contents = u.read()
+#similarity = json.loads(contents)['confidence']
+
 
 @form_site.route('/welcome', methods=['POST', 'GET'])
 #welcomes user or redirects back to root if logged out
