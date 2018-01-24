@@ -161,9 +161,9 @@ def welcome():
             posMatch = api_library.find_match(username)
 
         if posMatch != "none":
-            name = c.execute("SELECT name FROM users WHERE username = " + posMatch + ";").fetchall()[0][0]
-            bio =  c.execute("SELECT bio FROM users WHERE username = " + posMatch + ";").fetchall()[0][0]
-            image = c.execute("SELECT img_name FROM users WHERE username =" + posMatch + ";" + ".jpg").fetchall()[0][0]
+            name = c.execute("SELECT name FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
+            bio =  c.execute("SELECT bio FROM users WHERE username = '" + posMatch + "';").fetchall()[0][0]
+            image = c.execute("SELECT img_name FROM users WHERE username = '" + posMatch + "'" + ".jpg;").fetchall()[0][0]
             print "\n\n"
             print "YOUR MATCH: " + name
             print "\n\n"
