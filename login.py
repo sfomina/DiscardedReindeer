@@ -154,7 +154,6 @@ def welcome():
         return redirect( url_for('root') )
     else:
         username = session['user']
-        posMatch = api_library.find_match(username)
         if posMatch == None:
             api_library.find_match(username)
         if posMatch != None:
