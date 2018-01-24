@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+
+
+
+  <body class = "root">
+     <div class = "floatbody">
+
+      <div class = "flash">
+          {% set messages = get_flashed_messages() %}
+          {% for message in messages %}
+          {{message}}
+          {% endfor %}
+        </div>
+		<br>
+
+		<div class ="container">
+			<div class="row">
+				<div class="col-md-6 mx-auto">
+
+					<div class = "textb">
+      	 			   <form action="/">
+       	  				 Already have an account?
+        				 <br><input type="submit" value="Go Back!" class = "register right button">
+     	 				</form>
+					</div>
+
+      			  <br>
+      				<br>
+	  			  <form method="POST" action="/createaccount" enctype = "multipart/form-data">
+     				 <h2 class="centered" id="title">Tell us about yourself! </h2>
+
+      			   		<div class="form-group">
+      					  <b>  <label for="inputName">What's your name? (This will be displayed to other users)</label> </b>
+       				   <textarea class="form-control" name="inputName" id="inputName" rows="1" required></textarea>
+     			  		</div>
+
+      				  <div class="form-group">
+     					 <b> <label for="age">Age</label> </b>
+       				  <select class="form-control" name="age" id="age" required>
+                  <option disabled selected value> -- select an option -- </option>
+         				 {% for x in range(16, 100) %}
+         				<option> {{x}} </option>
+           			 	{% endfor %}
+        			</select>
+     		   </div>
+
+
+	   <div class="form-group">
+        <b>  <label for="gender">Your Gender</label> </b>
+          <select class="form-control" name="gender" id="gender">
+            <option disabled selected value> -- select an option -- </option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b>  <label for="prefGender">Preferred Partner Gender</label> </b>
+          <select class="form-control" name="prefGender" id="prefGender">
+            <option disabled selected value> -- select an option -- </option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+<!--
+        <div class="form-group">
+        <b> <label for="sexualOrientation">Sexual Orientation</label> </b>
+          <select class="form-control" name= "sexOren" id="sexOren" required>
+            <option>Heterosexual</option>
+            <option>Homosexual</option>
+            <option>Bisexual</option>
+          </select>
+        </div>
+-->
+        <div class="form-group">
+        <b> <label for="sexualOrientation">Favorite Programming Language</label> </b>
+          <select class="form-control" name="lang" id="lang" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Java</option>
+            <option>Python</option>
+            <option>C</option>
+            <option>Javascript</option>
+            <option> Ruby </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="sort">Favorite Sorting Algorithm</label> </b>
+          <select class="form-control" name= "sort" id="sort" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Merge sort</option>
+            <option>Heapsort</option>
+            <option>Quicksort</option>
+            <option>Counting sort</option>
+            <option>Bubble sort </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="type"> Which type of  programming do you prefer? </label> </b>
+          <select class="form-control" name="type" id="type" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Functional Programming (FP)</option>
+            <option>Object-Oriented Programming (OOP) </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="bitcoin"> If asked to, would you be able to explain bitcoin? </label> </b>
+          <select class="form-control" name= "bitcoin" id="bitcoin" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not really, but I can make it sound like I know what I'm talking about</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="case"> How do you name things? </label> </b>
+          <select class="form-control" name= "case" id="case" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>camelCase</option>
+            <option>snake_case</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+        <b> <label for="braces"> Which of these two  types of people are you? </label> </b>
+          <select class="form-control" name ="braces" id="braces" required>
+            <option disabled selected value> -- select an option -- </option>
+            <option>First</option>
+            <option>Second</option>
+          </select>
+        </div>
+        <img src="/static/formpic.jpg" width="70%">
+        <br>
+        <br>
+
+        <div class="form-group">
+        <b>  <label for="inputBio">Write a personal biography (100 words minimum)</label> </b>
+          <textarea class="form-control" name="bio" id="inputBio" rows="3"  required></textarea>
+        </div>
+
+
+        <div class="form-group">
+        <b><label for="inputPhoto" class="centered">Upload a photo of yourself!</label> </b><br>
+           <div class="centered">
+             <input type="file" class="form-control-file" name="file" id="inputPhoto" accept="image/jpeg, image/png, image/jpg" required/>
+         </div>
+        </div>
+        <br>
+
+        <input type="hidden" value= {{user}} formmethod="post" name="user">
+        <input type="hidden" value= {{pw}} formmethod="post" name="pw">
+
+          <br>
+
+          <input type="submit" value="Register" name="submit"  id="submit-button" onclick="return checkWordCount()"  class = "register right button">
+	  </form>
+  </div>
+</div>
+</div>
+  </div>
+  </body>
+{% endblock %}

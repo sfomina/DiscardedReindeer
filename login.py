@@ -75,6 +75,17 @@ def register():
         return redirect( url_for('root') )
 
 
+@form_site.route('/registerquiz', methods=['POST', 'GET'])
+def registerquiz():
+    username = request.form['user']
+    password = request.form['pw']
+    result = check_newuser(username)
+    if result == SUCCESS:
+        return render_template('registerquiz.html',title="Registration Quiz", user = username, pw = password)
+    elif result == BAD_USER:
+        flash("That username is already in use. Try another one")
+        return redirect (url_for("register"))
+
 
 @form_site.route('/createaccount', methods=['POST', 'GET'])
 #creates an account and runs encryption function on password
