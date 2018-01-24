@@ -32,6 +32,9 @@ creating the personality profile with the ibm api and fixed file bug
 karenC -- 2018-01-10 23:06:26
 lots of form making with html and css
 
+karenC -- 2018-01-21 20:09:20
+completed all html templates basic layout
+
 fominaS -- 2018-01-23 13:22:28
 worked on find match filter and calculations
 
@@ -69,5 +72,5 @@ fominaS -- 2018-01-24 08:00:27
 add phone numbers, names, and images to secured matches page
 
 karenC -- 2018-01-24 09:19:57
-matches complete
+matches complete, edited welcome page
 

@@ -46,65 +46,48 @@
 		</div>
 
 
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-3">
-
-				<div class="wrapper">
-					<nav id ="sidebar">
-						<div class="sidebar-header pad">
-							<h3>Recent Matches</h3>
+		<div class="container">
+		    <div class="row">
+	        
+		        <!--/span-->
+	{% if match != 'none' %}
+		        <div class="col-md-12">
+		            <div class="jumbotron pad">
+			            <div class="row placeholders">
+			              <div class="col-xs-6 col-sm-3 placeholder mx-auto">
+			                <img src= {{image}} width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+			                <h3>{{name}}</h3>
+	                    <h4>{{percent}}% similar</h4>
+						  </div>
 						</div>
-	                <ul class="list-unstyled components ">
-	                        <li>STUFF!</li>
-							<li>STUFF!</li>
-	                </ul>
-	                </nav>
-	             </div>
-	        </div>
-	        <!--/span-->
-{% if match != 'none' %}
-	        <div class="col-md-9">
-	            <div class="jumbotron pad">
-		            <div class="row placeholders">
-		              <div class="col-xs-6 col-sm-3 placeholder mx-auto">
-		                <img src= {{image}} width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-		                <h3>{{name}}</h3>
-                    <h4>{{percent}}% similar</h4>
-					  </div>
-					</div>
-					<div class="col-md-9 full mx-auto">
-		                <span class="text-muted">{{bio}}</span>
-					</div>
-					<div class="col-md-9 full mx-auto" onmouseover="change('MORE INFO')" onmouseout="changeback('Hover for more information')" >
-						<div id="textinfo">
-						 Hover for more information
+						<div class="col-md-9 full mx-auto">
+			                <span class="text-muted">{{bio}}</span>
+						</div>
+					
+			       </div>
+							<div class="row">
+								<div class="col-md-2"></div>
+							<div class= "col-md-4">
+	           				 	<form action="/left">
+									<button type="submit"><img class="small" src="/static/nolovelogo.png"></button>
+	          				 	   </form>
+	           			 	</div>
+							<div class="col-md-4">
+	             			   <form action="/right">
+								   <button type="submit"><img class="small" src="/static/lovelogo.png"></button>
+	         				  </form>
+	            		  	</div>
+							<div class="col-md-2"></div>
+							</div>
 						</div>
 		            </div>
-		       </div>
-					<br>
-						<div class="row">
-							<div class="col-md-2"></div>
-						<div class= "col-md-4">
-           				 	<form action="/left">
-								<button type="submit"><img class="small" src="/static/nolovelogo.png"></button>
-          				 	   </form>
-           			 	</div>
-						<div class="col-md-4">
-             			   <form action="/right">
-							   <button type="submit"><img class="small" src="/static/lovelogo.png"></button>
-         				  </form>
-            		  	</div>
-						<div class="col-md-2"></div>
-						</div>
-					</div>
-	            </div>
-	        </div>
-		</div>
-{% else %}
+		        </div>
+			</div>
+			<br>
+	{% else %}
 
-<h2> No suggested matches to display! Check back later. </h2>
+	<h2> No suggested matches to display! Check back later. </h2>
 
-{% endif %}
-</body>
+	{% endif %}
+	</body>
 {% endblock %}
